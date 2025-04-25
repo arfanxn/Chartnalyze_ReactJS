@@ -1,5 +1,9 @@
-import { ReactNode } from "react";
-import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { ChildrenProps, ClassNameProps } from '@/types/componentTypes'
+import classNames from 'classnames'
+import { ReactNode } from 'react'
+import useDocumentTitle from '@/hooks/useDocumentTitle'
+
+type Props = ClassNameProps & ChildrenProps & {}
 
 /**
  * Layout component that sets the document title based on route match titles.
@@ -16,10 +20,10 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
  * defaults to the application name.
  */
 
-const Layout = ({ children }: { children: ReactNode }): ReactNode => {
-	useDocumentTitle();
+const Layout = (props: Props): ReactNode => {
+    useDocumentTitle()
 
-	return <>{children}</>;
-};
+    return <main className={classNames(props.className)}>{props.children}</main>
+}
 
-export default Layout;
+export default Layout
