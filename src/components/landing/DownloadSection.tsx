@@ -34,6 +34,7 @@ export default function DownloadSection() {
                 <div className="flex flex-row flex-wrap gap-y-2 md:absolute md:right-8 md:bottom-16 md:flex md:flex-col md:flex-nowrap md:gap-y-4">
                     {downloadUrls.map(({ label, icon }) => (
                         <CButtonIconned
+                            key={label}
                             className="justify-between bg-white! text-black!"
                             label={label}
                             labelClassname="text-lg md:text-xl font-light"
