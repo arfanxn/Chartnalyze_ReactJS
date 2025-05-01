@@ -1,7 +1,8 @@
 import { ChildrenProps, ClassNameProps } from '@/types/componentTypes'
 import classNames from 'classnames'
 import { ReactNode } from 'react'
-import useDocumentTitle from '@/hooks/useDocumentTitle'
+import { useCurrentRouteTitle } from '@/hooks/useCurrentRouteTitle'
+import { useScrollToTopOnRouteChange } from '@/hooks/useScrollToTopOnRouteChange'
 
 type Props = ClassNameProps & ChildrenProps & {}
 
@@ -21,7 +22,8 @@ type Props = ClassNameProps & ChildrenProps & {}
  */
 
 const Layout = (props: Props): ReactNode => {
-    useDocumentTitle()
+    useCurrentRouteTitle()
+    useScrollToTopOnRouteChange()
 
     return <main className={classNames(props.className)}>{props.children}</main>
 }
