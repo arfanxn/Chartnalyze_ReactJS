@@ -37,9 +37,12 @@ const Header = ({ className }: Props) => {
                 {navigations.map(({ label, url }, index) => (
                     <Link key={label} to={url}>
                         <CButton
-                            className={classNames('outline outline-black', {
-                                'bg-white! text-black!': index === 0,
-                            })}
+                            className={classNames(
+                                'text-sm outline outline-black md:text-base',
+                                {
+                                    'bg-white! text-black!': index === 0,
+                                },
+                            )}
                         >
                             {label}
                         </CButton>
