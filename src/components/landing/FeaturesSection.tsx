@@ -1,25 +1,25 @@
 import classNames from 'classnames'
-import CCard from '../CCard'
+import CCard from '@/components/CCard'
+import CImage from '@/components/CImage'
 import { isEven } from '@/utils/booleanUtils'
-import CIcon from '../CIcon'
 
 export default function ServicesGrid() {
     const services = [
         {
-            label: 'Lorem Ipsum',
-            icon: 'mdi:gold',
+            label: 'Chartanalyze AI',
+            imageUrl: '/images/landing/chart-detection-black.png',
         },
         {
-            label: 'Lorem Ipsum Dolor',
-            icon: 'cryptocurrency:btc',
+            label: 'Assets Comparison',
+            imageUrl: '/images/landing/assets-white.png',
         },
         {
-            label: 'Lorem Ipsum Dolor Sit',
-            icon: 'simple-icons:apple',
+            label: 'Assets Heatmap',
+            imageUrl: '/images/landing/heatmap-black.png',
         },
         {
-            label: 'Lorem Ipsum Dolor Sit Amet',
-            icon: 'cryptocurrency:eth',
+            label: 'Chat Bot',
+            imageUrl: '/images/landing/chatbot-white.png',
         },
     ]
 
@@ -27,12 +27,12 @@ export default function ServicesGrid() {
         <section className="space-y-8">
             <h3 className="text-2xl font-bold md:text-4xl">Features</h3>
 
-            <ul className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                {services.map(({ label, icon }, index) => (
-                    <li key={icon}>
+            <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
+                {services.map(({ label, imageUrl }, index) => (
+                    <li key={index}>
                         <CCard
                             className={classNames(
-                                'relative p-4',
+                                'relative flex flex-row justify-between p-4',
                                 isEven(index + 1) ? 'bg-primary' : 'bg-white',
                             )}
                         >
@@ -49,14 +49,10 @@ export default function ServicesGrid() {
                                 </h4>
                             </div>
                             <div className="flex flex-row justify-end">
-                                <CIcon
-                                    icon={icon}
-                                    className={classNames(
-                                        'text-4xl md:text-6xl',
-                                        isEven(index + 1)
-                                            ? 'text-white'
-                                            : 'text-black',
-                                    )}
+                                <CImage
+                                    className="size-24 md:size-38"
+                                    src={imageUrl}
+                                    alt="ALT"
                                 />
                             </div>
                         </CCard>

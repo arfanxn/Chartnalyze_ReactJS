@@ -8,12 +8,13 @@ export default function FAQsSection() {
             answer: `No, you cannot. This app is designed solely as an educational and decision-making tool.`,
         },
         {
-            question: 'Where does it come from?',
-            answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
+            question:
+                'What makes Chartnalyze different from other analysis apps?',
+            answer: `Chartnalyze combines AI-driven pattern detection, real-time heatmaps, and built-in financial education.`,
         },
         {
-            question: 'Where can I get some?',
-            answer: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, necessitatibus. Natus libero architecto`,
+            question: 'Is Chartnalyze suitable for beginners?',
+            answer: `Yes, Chartnalyze offers a user-friendly interface and educational tools for beginners to learn.`,
         },
     ]
 

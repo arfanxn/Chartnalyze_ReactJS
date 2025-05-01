@@ -6,13 +6,13 @@ const Hero = () => {
         <section className="flex min-h-[100vh] flex-row items-center justify-between gap-x-8">
             <div className="w-full space-y-4 md:w-7/10 md:space-y-8">
                 <h2 className="text-4xl font-bold md:text-6xl">
-                    Financial education app in one platform
+                    AI-driven market analysis & financial education.
                 </h2>
                 <p className="text-lg font-light md:text-2xl">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Suscipit alias nulla natus doloremque ipsum eligendi
-                    necessitatibus accusantium laudantium, nesciunt laboriosam,
-                    atque illum expedita magni perspiciatis.
+                    Chartnalyze combines AI-powered market analysis with
+                    easy-to-understand financial education, helping both
+                    beginners and experts make confident, data-driven investment
+                    decisions in real-time.
                 </p>
 
                 <CButtonIconned
