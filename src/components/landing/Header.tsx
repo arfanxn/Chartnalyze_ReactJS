@@ -26,12 +26,12 @@ const Header = ({ className }: Props) => {
                 className,
             )}
         >
-            <div className="inline-flex items-center">
+            <Link to="/" className="inline-flex items-center">
                 <figure className="flex max-w-8 items-center justify-center md:max-w-10">
                     <TheLogo />
                 </figure>
                 <h1 className="text-lg font-bold md:text-2xl">{appName}</h1>
-            </div>
+            </Link>
 
             <nav className="flex flex-row gap-x-2">
                 {navigations.map(({ label, url }, index) => (
