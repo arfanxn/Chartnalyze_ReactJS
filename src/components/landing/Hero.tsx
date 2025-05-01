@@ -1,5 +1,7 @@
 import CButtonIconned from '@/components/CButtonIconned'
 import CImage from '@/components/CImage'
+import { Link } from 'react-scroll'
+import { isMobile } from 'react-device-detect'
 
 const Hero = () => {
     return (
@@ -15,12 +17,19 @@ const Hero = () => {
                     decisions in real-time.
                 </p>
 
-                <CButtonIconned
-                    label="Download"
-                    labelClassname="text-lg md:text-2xl font-light"
-                    icon="lucide:download"
-                    iconClassName="text-lg md:text-2xl"
-                />
+                <Link
+                    to="assets-section"
+                    smooth={true}
+                    duration={500}
+                    offset={isMobile ? -25 : -75}
+                >
+                    <CButtonIconned
+                        label="Explore"
+                        labelClassname="text-lg md:text-2xl font-light"
+                        icon="lucide:arrow-down"
+                        iconClassName="text-lg md:text-2xl"
+                    />
+                </Link>
             </div>
 
             <figure className="hidden flex-row justify-end md:flex md:w-3/10">

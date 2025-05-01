@@ -21,7 +21,7 @@ export default function AssetsSection() {
     ]
 
     return (
-        <section className="space-y-8">
+        <section id="assets-section" className="space-y-8">
             <h3 className="text-2xl font-bold md:text-4xl">Analyze Assets</h3>
             <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-8">
                 {Object.values(assets).map(({ label, icon }) => (
