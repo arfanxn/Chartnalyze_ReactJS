@@ -3,6 +3,7 @@ import CIcon from '@/components/CIcon'
 import classNames from 'classnames'
 import React, { forwardRef } from 'react'
 import moment from 'moment'
+import { Link } from 'react-router'
 
 const Footer = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
     ({ className, ...props }, ref) => {
@@ -92,12 +93,12 @@ const Footer = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
                         <ul className="flex flex-col gap-y-2 md:gap-y-4">
                             {downloads.map(({ label, url }) => (
                                 <li key={label}>
-                                    <a
+                                    <Link
                                         className="text-lg hover:underline md:text-2xl"
-                                        href={url}
+                                        to={url}
                                     >
                                         {label}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
