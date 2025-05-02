@@ -9,7 +9,7 @@ import LandingLayout from '@/layouts/LandingLayout'
 
 function Landing() {
     return (
-        <LandingLayout className="space-y-16 md:space-y-24">
+        <LandingLayout >
             <Hero />
             <AssetsSection />
             <FeaturesSection />

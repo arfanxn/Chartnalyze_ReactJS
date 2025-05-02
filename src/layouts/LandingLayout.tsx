@@ -28,12 +28,7 @@ const LandingLayout = ({
     }, [])
 
     return (
-        <Layout
-            className={classNames(
-                'relative flex flex-col px-4 md:px-8',
-                className,
-            )}
-        >
+        <Layout className={classNames(className)}>
             <Header
                 className={classNames('transition-opacity duration-300', {
                     'opacity-0': isFooterVisible,

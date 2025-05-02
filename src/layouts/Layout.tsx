@@ -25,7 +25,16 @@ const Layout = (props: Props): ReactNode => {
     useCurrentRouteTitle()
     useScrollToTopOnRouteChange()
 
-    return <main className={classNames(props.className)}>{props.children}</main>
+    return (
+        <main
+            className={classNames(
+                'relative flex flex-col space-y-16 px-4 md:space-y-24 md:px-8',
+                props.className,
+            )}
+        >
+            {props.children}
+        </main>
+    )
 }
 
 export default Layout
