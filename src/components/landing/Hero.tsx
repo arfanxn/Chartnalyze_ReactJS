@@ -25,7 +25,7 @@ const Hero = () => {
                 >
                     <CButtonIconned
                         label="Explore"
-                        labelClassname="text-lg md:text-2xl font-light"
+                        labelClassName="text-lg md:text-2xl font-light"
                         icon="lucide:arrow-down"
                         iconClassName="text-lg md:text-2xl"
                     />
