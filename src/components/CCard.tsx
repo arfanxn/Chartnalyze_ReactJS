@@ -1,17 +1,23 @@
-import { ChildrenProps, ClassNameProps } from '@/types/componentTypes'
+import { forwardRef, HTMLAttributes } from 'react'
 import classNames from 'classnames'
 
-type Props = ClassNameProps & ChildrenProps & {}
+type Props = HTMLAttributes<HTMLDivElement>
 
-export default function CCard(props: Props) {
-    return (
-        <article
+const CCard = forwardRef<HTMLDivElement, Props>(
+    ({ className, ...props }, ref) => (
+        <div
+            ref={ref}
             className={classNames(
                 'rounded-md text-white shadow-[0px_10px_0px_1px_rgba(0,0,0,0.25)] outline outline-black',
-                props.className,
+                className,
             )}
+            {...props}
         >
             {props.children}
-        </article>
-    )
-}
+        </div>
+    ),
+)
+
+CCard.displayName = 'CCard'
+
+export default CCard

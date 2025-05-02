@@ -1,17 +1,14 @@
-import { ClassNameProps } from '@/types/componentTypes'
+import { forwardRef, ImgHTMLAttributes } from 'react'
 import classNames from 'classnames'
 
-type Props = ClassNameProps & {
-    src?: string
-    alt?: string
-}
+type Props = ImgHTMLAttributes<HTMLImageElement>
 
-export default function CImage(props: Props) {
-    return (
-        <img
-            className={classNames(props.className)}
-            src={props.src}
-            alt={props.alt}
-        />
-    )
-}
+const CImage = forwardRef<HTMLImageElement, Props>(
+    ({ className, ...props }, ref) => (
+        <img ref={ref} className={classNames(className)} {...props} />
+    ),
+)
+
+CImage.displayName = 'CImage'
+
+export default CImage

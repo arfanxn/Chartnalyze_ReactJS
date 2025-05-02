@@ -1,15 +1,13 @@
-import { ChildrenProps } from '@/types/componentTypes'
-import React, { Suspense } from 'react'
+import { Suspense, ReactNode } from 'react'
 
-type Props = ChildrenProps & {
-    fallback?: React.ReactNode // The fallback content, like a loading spinner
+type Props = {
+    children: ReactNode
+    fallback?: ReactNode
 }
 
-const CSuspense: React.FC<Props> = ({
+const CSuspense = ({
     children,
     fallback = <div>Loading...</div>,
-}) => {
-    return <Suspense fallback={fallback}>{children}</Suspense>
-}
+}: Props) => <Suspense fallback={fallback}>{children}</Suspense>
 
 export default CSuspense

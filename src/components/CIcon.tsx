@@ -1,13 +1,12 @@
-import { ClassNameProps } from '@/types/componentTypes'
-import { Icon } from '@iconify/react/dist/iconify.js'
+import { Icon, IconProps } from '@iconify/react'
 import classNames from 'classnames'
 
-type Props = ClassNameProps & {
-    icon: string
-}
+type Props = IconProps & {}
 
-export default function CIcon(props: Props) {
-    return (
-        <Icon icon={props.icon} className={classNames('', props.className)} />
-    )
-}
+const CIcon = ({ icon, className, ...props }: Props) => (
+    <Icon icon={icon} className={classNames('', className)} {...props} />
+)
+
+CIcon.displayName = 'CIcon'
+
+export default CIcon
