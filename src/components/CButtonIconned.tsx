@@ -6,7 +6,7 @@ import classNames from 'classnames'
 type Props = ClassNameProps &
     OnClickProps & {
         label: string
-        labelClassname?: string
+        labelClassName?: string
         icon: string
         iconClassName?: string
     }
@@ -20,7 +20,7 @@ export default function CButtonIconned(props: Props) {
             )}
             onClick={props.onClick}
         >
-            <span className={classNames(props.labelClassname)}>
+            <span className={classNames(props.labelClassName)}>
                 {props.label}
             </span>
             <CIcon
