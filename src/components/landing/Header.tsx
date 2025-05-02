@@ -1,12 +1,12 @@
 import TheLogo from '@/components/TheLogo'
 import classNames from 'classnames'
-import { ClassNameProps } from '@/types/componentTypes'
 import { Link } from 'react-router'
 import CButton from '../CButton'
+import { forwardRef, HTMLProps } from 'react'
 
-type Props = ClassNameProps & {}
+type Props = HTMLProps<HTMLElement>
 
-const Header = ({ className }: Props) => {
+const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const appName = import.meta.env.VITE__APP_NAME
     const navigations = [
         {
@@ -21,6 +21,7 @@ const Header = ({ className }: Props) => {
 
     return (
         <header
+            ref={ref}
             className={classNames(
                 'fixed inset-x-0 top-0 z-50 flex flex-row items-center justify-between border-b border-black/25 bg-white px-4 py-2 md:px-8',
                 className,
@@ -51,6 +52,8 @@ const Header = ({ className }: Props) => {
             </nav>
         </header>
     )
-}
+})
+
+Header.displayName = 'Header'
 
 export default Header

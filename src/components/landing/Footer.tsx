@@ -5,7 +5,9 @@ import React, { forwardRef } from 'react'
 import moment from 'moment'
 import { Link } from 'react-router'
 
-const Footer = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
+type Props = React.HTMLProps<HTMLElement>
+
+const Footer = forwardRef<HTMLElement, Props>(
     ({ className, ...props }, ref) => {
         const appName = import.meta.env.VITE__APP_NAME
         const appDescription = `Chartnalyze combines AI-powered market analysis with
@@ -123,5 +125,7 @@ const Footer = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
         )
     },
 )
+
+Footer.displayName = 'Footer'
 
 export default Footer
