@@ -37,7 +37,7 @@ export default function DownloadSection() {
                             key={label}
                             className="justify-between bg-white! text-black!"
                             label={label}
-                            labelClassname="text-lg md:text-xl font-light"
+                            labelClassName="text-lg md:text-xl font-light"
                             icon={icon}
                             iconClassName="text-lg md:text-xl"
                         />
@@ -86,7 +86,7 @@ export default function DownloadSection() {
                         <CButtonIconned
                             className="justify-between bg-white! text-black!"
                             label={`Install on ${os}`}
-                            labelClassname="text-xl font-light"
+                            labelClassName="text-xl font-light"
                             icon={icon}
                             iconClassName="text-xl"
                         />
