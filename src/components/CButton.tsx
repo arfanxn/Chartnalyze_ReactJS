@@ -8,7 +8,7 @@ const CButton = forwardRef<HTMLButtonElement, Props>(
         <button
             ref={ref}
             className={classNames(
-                'bg-primary rounded-md px-2 py-1 text-white transition-transform duration-150 hover:scale-105 active:scale-105 md:px-4 md:py-2',
+                'bg-primary rounded-md px-2 py-1 text-white transition-transform duration-150 hover:scale-105 active:scale-95 md:px-4 md:py-2',
                 className,
             )}
             {...props}
