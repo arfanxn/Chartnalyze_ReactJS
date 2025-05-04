@@ -9,7 +9,7 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 
 const CAlert = forwardRef<HTMLDivElement, Props>(
     ({ className, message, messageClassName, type, ...props }, ref) => (
-        <div ref={ref} className={classNames(className)} {...props}>
+        <div ref={ref} className={classNames('w-full', className)} {...props}>
             <p
                 className={classNames(
                     {
