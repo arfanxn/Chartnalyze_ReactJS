@@ -3,7 +3,6 @@ import Cookies from 'js-cookie'
 import axios from 'axios'
 import decamelizeKeys from 'decamelize-keys'
 import camelcaseKeys from 'camelcase-keys'
-import { useNavigate } from 'react-router'
 
 const baseURL = import.meta.env.VITE__API_URL
 
@@ -13,7 +12,10 @@ axiosInstance.interceptors.request.use(
     (config) => {
         config.baseURL = baseURL
         config.headers.setContentType('multipart/form-data')
-        config.headers.setAuthorization(`Bearer ${Cookies.get('access_token')}`)
+
+        const accessToken = Cookies.get('access_token')
+        if (accessToken)
+            config.headers.setAuthorization(`Bearer ${accessToken}`)
 
         config.data = decamelizeKeys(config.data, { deep: true })
 
@@ -33,11 +35,6 @@ axiosInstance.interceptors.response.use(
                 error.response.data = camelcaseKeys(error.response.data, {
                     deep: true,
                 })
-
-                if (error.response?.status === 401) {
-                    const navigate = useNavigate()
-                    navigate('/login', { replace: true })
-                }
             }
         }
         return Promise.reject(error)
