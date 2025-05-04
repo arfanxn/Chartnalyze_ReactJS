@@ -9,7 +9,7 @@ const TheLogo = forwardRef<HTMLImageElement, Props>(
         <CImage
             ref={ref}
             className={classNames('aspect-3/4 h-full w-fit', className)}
-            src="/logo-3:4.png"
+            src="/logo-3-4.png"
             alt="Logo"
             {...props}
         />
