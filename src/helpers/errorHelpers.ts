@@ -1,9 +1,9 @@
-import { ResponseBody, ResponseBodyErrors } from '@/types/responseTypes'
+import { ResponseBodyErrors } from '@/types/responseTypes'
 import axios, { AxiosError } from 'axios'
 import { FieldValues, UseFormSetError, FieldPath } from 'react-hook-form'
 
 export const handleUnprocessableEntity = <T extends FieldValues>(
-    errors: ResponseBodyErrors,
+    errors: Record<string, string | string[]>,
     setError: UseFormSetError<T>,
 ): void => {
     Object.entries(errors).forEach(([field, messages]) => {
@@ -15,7 +15,9 @@ export const handleUnprocessableEntity = <T extends FieldValues>(
     })
 }
 
-export const isUnprocessableEntity = (error: unknown): error is AxiosError<ResponseBody> => {
+export const isUnprocessableEntity = (
+    error: unknown,
+): error is AxiosError<ResponseBodyErrors> => {
     return (
         axios.isAxiosError(error) &&
         error.response?.status === 422 &&
