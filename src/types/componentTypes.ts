@@ -1,16 +1,4 @@
-import React, { ReactNode } from 'react'
-
-export type IdProps = {
-    id?: string
-}
-
-export type ClassNameProps = {
-    className?: string
-}
-
-export type PlaceholderProps = {
-    placeholder?: string
-}
+import React from 'react'
 
 export type OnClick = (event: React.MouseEvent<HTMLButtonElement>) => void
 export type OnClickProps = {
@@ -35,8 +23,4 @@ export type OnFocusProps = {
 export type OnBlur = (event: React.FocusEvent<HTMLInputElement>) => void
 export type OnBlurProps = {
     onBlur?: OnBlur
-}
-
-export type ChildrenProps = {
-    children: ReactNode
 }
