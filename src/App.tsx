@@ -1,15 +1,16 @@
 // App.tsx
-import { RouterProvider } from 'react-router'
 import '@/assets/styles/index.css'
-import { router } from '@/router'
+import { RouterProvider } from 'react-router'
+import { Suspense } from 'react'
 import CToastContainer from '@/components/CToastContainer'
+import { router } from '@/router'
 
 const App = () => {
     return (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
             <RouterProvider router={router} />
             <CToastContainer />
-        </>
+        </Suspense>
     )
 }
 
