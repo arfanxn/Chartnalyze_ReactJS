@@ -11,11 +11,12 @@ const axiosInstance: AxiosInstance = axios.create()
 axiosInstance.interceptors.request.use(
     (config) => {
         config.baseURL = baseURL
-        config.headers.setContentType('multipart/form-data')
+        config.headers.set('Content-Type', 'multipart/form-data')
+        config.headers.set('X-API-Key', import.meta.env.VITE__API_KEY)
 
         const accessToken = Cookies.get('access_token')
         if (accessToken)
-            config.headers.setAuthorization(`Bearer ${accessToken}`)
+            config.headers.set('Authorization', `Bearer ${accessToken}`)
 
         config.data = decamelizeKeys(config.data, { deep: true })
 
