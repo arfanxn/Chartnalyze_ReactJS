@@ -24,3 +24,11 @@
 .text-primary {
     color: #008080;
 }
+
+.bg-secondary {
+    background-color: #800000;
+}
+
+.text-secondary {
+    color: #800000;
+}

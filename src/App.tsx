@@ -1,6 +1,6 @@
 // App.tsx
 import { RouterProvider } from 'react-router'
-import '@/assets/styles/main.css'
+import '@/assets/styles/index.css'
 import { router } from '@/router'
 import CToastContainer from '@/components/CToastContainer'
 
