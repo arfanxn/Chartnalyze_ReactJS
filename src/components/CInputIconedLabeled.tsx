@@ -1,68 +1,110 @@
-import { ClassNameProps, OnClick, OnInputProps } from '@/types/componentTypes'
+// @/components/CInputIconedLabeled.tsx
+import {
+    forwardRef,
+    HTMLProps,
+    InputHTMLAttributes,
+    Ref,
+    useState,
+} from 'react'
 import CIcon from '@/components/CIcon'
 import CInput from '@/components/CInput'
 import classNames from 'classnames'
 import { ulid } from 'ulid'
-import { useState } from 'react'
+import { OnClick } from '@/types/componentTypes'
 
-type Props = ClassNameProps &
-    OnInputProps & {
-        label?: string
-        labelClassName?: string
-        icon?: string
-        iconOnClick?: OnClick
-        iconClassName?: string
-        inputClassName?: string
-    }
+type Props = {
+    label?: string
+    labelClassName?: string
+    icon?: string
+    iconOnClick?: OnClick
+    iconClassName?: string
+    inputProps?: InputHTMLAttributes<HTMLInputElement>
+    inputRef?: Ref<HTMLInputElement>
+} & HTMLProps<HTMLDivElement>
 
-export default function CInputIconedLabeled(props: Props) {
-    const inputId = ulid()
+const CInputIconedLabeled = forwardRef<HTMLDivElement, Props>(
+    (
+        {
+            className,
+            label,
+            labelClassName,
+            icon,
+            iconOnClick,
+            iconClassName,
+            inputProps,
+            inputRef,
+            ...rest
+        },
+        ref,
+    ) => {
+        const inputId = ulid()
+        const [isInputOnFocus, setIsInputOnFocus] = useState(false)
 
-    const [isInputOnFocus, setIsInputOnFocus] = useState(false)
+        const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+            setIsInputOnFocus(true)
+            inputProps?.onFocus?.(e)
+        }
 
-    return (
-        <div className={classNames('flex flex-col gap-y-1', props.className)}>
-            {props.label && (
-                <div>
-                    <label
-                        htmlFor={inputId}
-                        className={classNames(
-                            'text-sm text-black',
-                            props.labelClassName,
-                        )}
-                    >
-                        {props.label}
-                    </label>
-                </div>
-            )}
+        const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+            setIsInputOnFocus(false)
+            inputProps?.onBlur?.(e)
+        }
+
+        return (
             <div
-                className={classNames(
-                    'flex flex-row items-center justify-between gap-x-1 rounded-md bg-white px-2 py-1 outline-1 transition-colors duration-150',
-                    isInputOnFocus ? 'outline-black' : 'outline-black/25',
-                )}
+                ref={ref}
+                className={classNames('flex flex-col gap-y-1', className)}
+                {...rest}
             >
-                <CInput
-                    id={inputId}
-                    onInput={props.onInput}
-                    className={classNames(
-                        'w-full px-0! py-0! outline-none! focus:outline-none!',
-                        props.inputClassName,
-                    )}
-                    onFocus={() => setIsInputOnFocus(true)}
-                    onBlur={() => setIsInputOnFocus(false)}
-                />
-                {props.icon && (
-                    <button onClick={props.iconOnClick}>
-                        <CIcon
-                            icon={props.icon}
+                {label && (
+                    <div>
+                        <label
+                            htmlFor={inputId}
                             className={classNames(
-                                'text-lg text-black md:text-2xl',
-                                props.iconClassName,
+                                'text-sm text-black',
+                                labelClassName,
                             )}
-                        />
-                    </button>
+                        >
+                            {label}
+                        </label>
+                    </div>
                 )}
+
+                <div
+                    className={classNames(
+                        'flex flex-row items-center justify-between gap-x-1 rounded-md bg-white px-2 py-1 outline-1 transition-colors duration-150',
+                        isInputOnFocus ? 'outline-black' : 'outline-black/25',
+                    )}
+                >
+                    <CInput
+                        ref={inputRef}
+                        {...inputProps}
+                        id={inputId}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        className={classNames(
+                            'w-full px-0! py-0! outline-none! focus:outline-none!',
+                            inputProps?.className,
+                        )}
+                    />
+
+                    {icon && (
+                        <button type="button" onClick={iconOnClick}>
+                            <CIcon
+                                icon={icon}
+                                className={classNames(
+                                    'text-sm text-black md:text-lg',
+                                    iconClassName,
+                                )}
+                            />
+                        </button>
+                    )}
+                </div>
             </div>
-        </div>
-    )
-}
+        )
+    },
+)
+
+CInputIconedLabeled.displayName = 'CInputIconedLabeled'
+
+export default CInputIconedLabeled
