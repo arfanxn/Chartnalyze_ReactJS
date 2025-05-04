@@ -22,7 +22,7 @@ export default function FAQsSection() {
         <section className="space-y-8">
             <h3 className="text-2xl font-bold md:text-4xl">FAQs</h3>
 
-            <ul className="grid grid-cols-2 gap-x-8 md:grid-cols-3 md:gap-x-24">
+            <ul className="grid grid-cols-2 gap-x-8 md:grid-cols-3 lg:gap-x-16">
                 {faqs.map(({ question, answer }, index) => (
                     <li key={question}>
                         <CCard

@@ -23,32 +23,34 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
         <header
             ref={ref}
             className={classNames(
-                'fixed inset-x-0 top-0 z-50 flex flex-row items-center justify-between border-b border-black/25 bg-white px-4 py-2 md:px-8',
+                'fixed inset-x-0 top-0 z-50 border-b border-black/25 bg-white',
                 className,
             )}
         >
-            <Link to="/" className="inline-flex items-center">
-                <figure className="flex max-w-8 items-center justify-center md:max-w-10">
-                    <TheLogo />
-                </figure>
-                <h1 className="text-lg font-bold md:text-2xl">{appName}</h1>
-            </Link>
+            <nav className="mx-auto flex flex-row items-center justify-between px-4 py-2 md:px-8 lg:w-6xl">
+                <Link to="/" className="inline-flex items-center">
+                    <figure className="flex max-w-8 items-center justify-center md:max-w-10">
+                        <TheLogo />
+                    </figure>
+                    <h1 className="text-lg font-bold md:text-2xl">{appName}</h1>
+                </Link>
 
-            <nav className="flex flex-row gap-x-2">
-                {navigations.map(({ label, url }, index) => (
-                    <Link key={label} to={url}>
-                        <CButton
-                            className={classNames(
-                                'text-sm outline outline-black md:text-base',
-                                {
-                                    'bg-white! text-black!': index === 0,
-                                },
-                            )}
-                        >
-                            {label}
-                        </CButton>
-                    </Link>
-                ))}
+                <div className="flex flex-row gap-x-2">
+                    {navigations.map(({ label, url }, index) => (
+                        <Link key={label} to={url}>
+                            <CButton
+                                className={classNames(
+                                    'text-sm outline outline-black md:text-base',
+                                    {
+                                        'bg-white! text-black!': index === 0,
+                                    },
+                                )}
+                            >
+                                {label}
+                            </CButton>
+                        </Link>
+                    ))}
+                </div>
             </nav>
         </header>
     )

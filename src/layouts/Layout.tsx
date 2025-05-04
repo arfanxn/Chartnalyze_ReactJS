@@ -14,7 +14,7 @@ const Layout = forwardRef<HTMLElement, Props>(
             <main
                 ref={ref}
                 className={classNames(
-                    'relative flex flex-col space-y-16 px-4 md:space-y-24 md:px-8',
+                    'relative mx-auto flex flex-col space-y-16 px-4 md:space-y-24 md:px-8 lg:w-6xl',
                     className,
                 )}
             >

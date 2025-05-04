@@ -31,7 +31,7 @@ export default function DownloadSection() {
                     Our app is available on Android and iOS
                 </p>
 
-                <div className="flex flex-row flex-wrap gap-y-2 md:absolute md:right-8 md:bottom-16 md:flex md:flex-col md:flex-nowrap md:gap-y-4">
+                <div className="flex flex-row flex-wrap gap-2 md:absolute md:right-8 md:bottom-16 md:flex md:flex-col md:flex-nowrap md:gap-4">
                     {downloadUrls.map(({ label, icon }) => (
                         <CButtonIconned
                             key={label}
