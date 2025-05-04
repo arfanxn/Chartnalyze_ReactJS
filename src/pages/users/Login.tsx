@@ -1,0 +1,143 @@
+// External libraries
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router'
+import { object, string } from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useDispatch } from 'react-redux'
+// Services
+import * as userService from '@/services/userService'
+import {
+    handleUnprocessableEntity,
+    isUnprocessableEntity,
+} from '@/helpers/errorHelpers'
+import { toast } from '@/helpers/toastHelpers'
+// Custom hooks
+import { useBool } from '@/hooks/useBool'
+// Redux actions
+import { setSelf as setSelfUser } from '@/stores/userSlice'
+// Components
+import CAlert from '@/components/CAlert'
+import CButton from '@/components/CButton'
+import CCard from '@/components/CCard'
+import CInputIconedLabeled from '@/components/CInputIconedLabeled'
+import Header from '@/components/landing/Header'
+import Layout from '@/layouts/Layout'
+import axios from 'axios'
+
+const schema = object().shape({
+    identifier: string().label('Email or username').required().min(2).max(16),
+    password: string().label('Password').required().min(8).max(50),
+})
+
+function Login() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [isPasswordVisible, , togglePasswordVisibility] = useBool()
+    useBool()
+
+    const {
+        register: registerInput,
+        handleSubmit,
+        getValues,
+        setError,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    })
+
+    const loginAction = async () => {
+        try {
+            const form = getValues()
+            const { message } = await userService.login(form)
+            const { user } = await userService.showSelf()
+            dispatch(setSelfUser(user))
+            toast({ message, type: 'success' })
+            navigate('/dashboard', { replace: true })
+        } catch (e: unknown) {
+            if (axios.isAxiosError(e)) {
+                if (isUnprocessableEntity(e)) {
+                    handleUnprocessableEntity(e.response!.data.errors, setError)
+                }
+            }
+            throw e
+        }
+    }
+
+    return (
+        <Layout>
+            <Header />
+            <section className="flex min-h-[100vh] flex-row items-center justify-center">
+                <CCard className="w-full space-y-4 p-8 md:my-24 md:w-[33%]">
+                    <h3 className="text-lg font-semibold text-black md:text-2xl">
+                        Login
+                    </h3>
+
+                    <form
+                        className="space-y-4"
+                        onSubmit={handleSubmit(loginAction)}
+                    >
+                        <div className="space-y-1">
+                            <CInputIconedLabeled
+                                label="Your email or username"
+                                inputProps={{ ...registerInput('identifier') }}
+                            />
+                            {errors.identifier && (
+                                <CAlert
+                                    message={errors.identifier.message!}
+                                    type="error"
+                                />
+                            )}
+                        </div>
+                        <div className="space-y-1">
+                            <CInputIconedLabeled
+                                label="Password"
+                                inputProps={{
+                                    ...registerInput('password'),
+                                    autoComplete: 'off',
+                                    type: isPasswordVisible
+                                        ? 'text'
+                                        : 'password',
+                                }}
+                                icon={`lucide:${isPasswordVisible ? 'eye' : 'eye-closed'}`}
+                                iconOnClick={
+                                    togglePasswordVisibility as () => void
+                                }
+                            />
+                            {errors.password && (
+                                <CAlert
+                                    message={errors.password.message!}
+                                    type="error"
+                                />
+                            )}
+                        </div>
+
+                        <CButton className="mt-2 w-full py-2! font-semibold md:text-base">
+                            Login
+                        </CButton>
+                    </form>
+
+                    <div className="flex flex-col items-center space-y-0 gap-y-0">
+                        <Link to="/forgot-password">
+                            <p className="text-base font-semibold text-black">
+                                Forgot password?
+                            </p>
+                        </Link>
+
+                        <span className="text-base font-semibold text-black">
+                            or
+                        </span>
+
+                        <Link to="/register">
+                            <p className="text-primary text-base font-semibold">
+                                Don't have an account yet?
+                            </p>
+                        </Link>
+                    </div>
+                </CCard>
+            </section>
+        </Layout>
+    )
+}
+
+export default Login
