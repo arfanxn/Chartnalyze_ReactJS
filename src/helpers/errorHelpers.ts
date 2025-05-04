@@ -29,13 +29,13 @@ export const handleUnprocessableEntity = <T extends FieldValues>(
 
 export const handleError = <Fields extends FieldValues>(
     error: unknown,
-    additionals: {
+    additionals?: {
         setError?: UseFormSetError<Fields>
     },
 ) => {
     if (axios.isAxiosError(error)) {
         if (error.response) {
-            if (isUnprocessableEntity(error) && additionals.setError)
+            if (isUnprocessableEntity(error) && additionals?.setError)
                 handleUnprocessableEntity(
                     error.response.data.errors,
                     additionals.setError,
