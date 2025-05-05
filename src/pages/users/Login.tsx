@@ -68,7 +68,7 @@ function Login() {
         <Layout>
             <Header />
             <section className="flex min-h-[100vh] flex-row items-center justify-center">
-                <CCard className="w-full space-y-4 p-8 md:my-24 md:w-[33%]">
+                <CCard className="w-full space-y-4 p-8 md:my-24 md:w-[50%] lg:w-[33%]">
                     <h3 className="text-lg font-semibold text-black md:text-2xl">
                         Login
                     </h3>
