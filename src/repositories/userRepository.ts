@@ -23,6 +23,11 @@ export const login = async (form: {
     return response
 }
 
+export const logout = async (): Promise<AxiosResponse<ResponseBody>> => {
+    const response = await axiosInstance.delete(`/api/users/logout`)
+    return response
+}
+
 export const verify = async (form: {
     code: string
 }): Promise<AxiosResponse<ResponseBody>> => {
