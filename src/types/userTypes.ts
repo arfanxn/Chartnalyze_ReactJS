@@ -4,6 +4,7 @@ export type User = {
     birthDate?: string
     username: string
     email: string
+    emailVerifiedAt: string | null
     createdAt: string
     updatedAt: string
 }
