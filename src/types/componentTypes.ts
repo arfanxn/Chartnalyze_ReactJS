@@ -1,5 +1,10 @@
 import React from 'react'
 
+export type MiddlewareComponent = React.FC<{
+    children?: never
+    next: () => void | Promise<void>
+}>
+
 export type OnClick = (event: React.MouseEvent<HTMLButtonElement>) => void
 export type OnClickProps = {
     onClick?: OnClick
