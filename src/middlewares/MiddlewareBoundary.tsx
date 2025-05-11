@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router'
 import { type MiddlewareComponent } from '@/types/componentTypes'
 import { useLocation } from 'react-router'
@@ -10,31 +10,25 @@ export type MiddlewareBoundaryProps = {
 
 const MiddlewareBoundary = ({
     children,
-    middlewares,
+    middlewares = [],
 }: MiddlewareBoundaryProps) => {
-    const [runningMiddlewaresCount, setRunningMiddlewaresCount] = useState(0)
     const location = useLocation()
 
     const next = () => {
-        setRunningMiddlewaresCount((prev) => prev - 1)
+        //
     }
 
     useEffect(() => {
-        setRunningMiddlewaresCount(middlewares?.length || 0)
-    }, [location.key, middlewares])
+        //
+    }, [])
 
     return (
         <>
-            {middlewares &&
-                middlewares.map((MC, index) => (
-                    <MC key={`${location.key}-${index}`} next={next} />
-                ))}
+            {middlewares.map((Middleware, index) => (
+                <Middleware key={`${location.key}-${index}`} next={next} />
+            ))}
 
-            {runningMiddlewaresCount === 0 ? (
-                children || <Outlet />
-            ) : (
-                <div>Loading...</div>
-            )}
+            {children || <Outlet />}
         </>
     )
 }
