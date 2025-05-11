@@ -128,7 +128,7 @@ function Login() {
                             or
                         </span>
 
-                        <Link to="/register">
+                        <Link to="/users/register">
                             <p className="text-primary text-base font-semibold">
                                 Don't have an account yet?
                             </p>

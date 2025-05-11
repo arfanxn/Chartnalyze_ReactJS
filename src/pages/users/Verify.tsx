@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { string, object } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/stores'
 import classNames from 'classnames'
@@ -33,7 +33,7 @@ const schema = object().shape({
 
 function Verify() {
     const navigate = useNavigate()
-    const user = useSelector((state: RootState) => state.user.self)
+    const self = useSelector((state: RootState) => state.user.self)
     const hasSent = useRef(false)
 
     const { countdown, isCountdowning, startCountdown, resetCountdown } =
@@ -65,8 +65,8 @@ function Verify() {
         }
     }
 
-    const sendAction = async () => {
-        await otpService.send({ email: user!.email }).catch((e) => {
+    const sendAction = useCallback(async () => {
+        await otpService.send({ email: self!.email }).catch((e) => {
             if (axios.isAxiosError(e)) {
                 if (e.response?.status === 429) {
                     toast({
@@ -77,14 +77,14 @@ function Verify() {
                 }
             }
         })
-    }
+    }, [self])
 
     const resendAction = async () => {
         try {
             resetCountdown()
             startCountdown()
             toast({ message: 'Otp sent successfully', type: 'success' })
-            const form = { email: user!.email }
+            const form = { email: self!.email }
             await otpService.send(form)
         } catch (e) {
             if (axios.isAxiosError(e)) {
@@ -105,8 +105,7 @@ function Verify() {
             startCountdown()
             sendAction()
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [sendAction, startCountdown])
 
     return (
         <Layout>
@@ -119,7 +118,7 @@ function Verify() {
                         </h3>
                         <p className="inline-flex flex-col text-sm font-extralight text-black md:text-base">
                             <span>Enter the otp we sent to</span>
-                            <span className="text-primary">jack@gm.com</span>
+                            <span className="text-primary">{self!.email}</span>
                         </p>
                     </header>
 
