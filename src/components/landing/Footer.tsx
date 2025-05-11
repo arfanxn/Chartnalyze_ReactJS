@@ -22,15 +22,15 @@ const Footer = forwardRef<HTMLElement, Props>(
             },
             {
                 label: 'Register',
-                url: '/register',
+                url: '/users/register',
             },
             {
                 label: 'Login',
-                url: '/login',
+                url: '/users/login',
             },
             {
                 label: 'Forgot Password',
-                url: '/forgot-password',
+                url: '/users/forgot-password',
             },
         ]
 

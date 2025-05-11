@@ -11,11 +11,11 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const navigations = [
         {
             label: 'Register',
-            url: '/register',
+            url: '/users/register',
         },
         {
             label: 'Login',
-            url: '/login',
+            url: '/users/login',
         },
     ]
 
