@@ -30,6 +30,14 @@ export const login = async (form: {
     }
 }
 
+export const logout = async (): Promise<{ message: string }> => {
+    const response = await userRepository.logout()
+    Cookies.remove('access_token')
+    return {
+        message: response.data.message,
+    }
+}
+
 export const verify = async (form: {
     code: string
 }): Promise<{ message: string }> => {
