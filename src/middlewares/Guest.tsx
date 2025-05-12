@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/hooks/useAppSelector'
+import { useSelfStore } from '@/stores/useSelfStore'
 import { MiddlewareComponent } from '@/types/componentTypes'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 const Guest: MiddlewareComponent = ({ next }) => {
     const navigate = useNavigate()
 
-    const self = useAppSelector((state) => state.user.self)
+    const self = useSelfStore((state) => state.self)
     const isGuest = self === null
 
     useEffect(() => {

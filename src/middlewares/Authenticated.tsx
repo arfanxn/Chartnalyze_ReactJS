@@ -1,12 +1,12 @@
 import { MiddlewareComponent } from '@/types/componentTypes'
-import { useAppSelector } from '@/hooks/useAppSelector'
 import { useNavigate } from 'react-router'
 import { useEffect } from 'react'
+import { useSelfStore } from '@/stores/useSelfStore'
 
 const Authenticated: MiddlewareComponent = ({ next }) => {
     const navigate = useNavigate()
 
-    const self = useAppSelector((state) => state.user.self)
+    const self = useSelfStore((state) => state.self)
     const isAuthenticated = self !== null
 
     useEffect(() => {
