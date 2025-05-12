@@ -1,7 +1,10 @@
-import Middleware from '@/middlewares/Middleware'
-import Authenticate from '@/middlewares/Authenticate'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router'
+import MiddlewareBoundary from '@/middlewares/MiddlewareBoundary'
+import Guest from '@/middlewares/Guest'
+import Authenticated from '@/middlewares/Authenticated'
+import EmailVerified from '@/middlewares/EmailVerified'
+import EmailNotVerified from '@/middlewares/EmailNotVerified'
 
 // Lazy-loaded components
 const Landing = lazy(() => import('@/pages/Landing'))
@@ -9,32 +12,43 @@ const Register = lazy(() => import('@/pages/users/Register'))
 const Verify = lazy(() => import('@/pages/users/Verify'))
 const Login = lazy(() => import('@/pages/users/Login'))
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
+const UsersIndex = lazy(() => import('@/pages/UsersIndex'))
 
 export const router = createBrowserRouter([
+    { path: '/', element: <Landing /> },
     {
-        path: '/',
-        element: <Landing />,
-    },
-    {
-        path: '/register',
-        element: <Register />,
-    },
-    {
-        path: '/verify',
-        element: <Verify />,
-    },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '',
-        element: <Middleware middlewares={[Authenticate]} />,
+        path: '/users',
         children: [
             {
-                path: '/dashboard',
-                element: <Dashboard />,
+                element: <MiddlewareBoundary middlewares={[Guest]} />,
+                children: [
+                    { path: 'register', element: <Register /> },
+                    { path: 'login', element: <Login /> },
+                ],
             },
+            {
+                element: <MiddlewareBoundary middlewares={[Authenticated]} />,
+                children: [
+                    {
+                        path: 'verify',
+                        element: (
+                            <MiddlewareBoundary
+                                middlewares={[EmailNotVerified]}
+                                children={<Verify />}
+                            />
+                        ),
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        element: (
+            <MiddlewareBoundary middlewares={[Authenticated, EmailVerified]} />
+        ),
+        children: [
+            { path: '/dashboard', element: <Dashboard /> },
+            { path: '/users', element: <UsersIndex /> },
         ],
     },
 ])
