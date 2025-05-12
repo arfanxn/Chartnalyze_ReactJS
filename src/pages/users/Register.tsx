@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router'
 import { object, ref, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useDispatch } from 'react-redux'
 // Services
 import * as userService from '@/services/userService'
 import {
@@ -13,8 +12,6 @@ import {
 import { toast } from '@/helpers/toastHelpers'
 // Custom hooks
 import { useBool } from '@/hooks/useBool'
-// Redux actions
-import { setSelf as setSelfUser } from '@/stores/userSlice'
 // Components
 import CAlert from '@/components/CAlert'
 import CButton from '@/components/CButton'
@@ -23,6 +20,7 @@ import CInputIconedLabeled from '@/components/CInputIconedLabeled'
 import Header from '@/components/landing/Header'
 import Layout from '@/layouts/Layout'
 import axios from 'axios'
+import { useSelfStore } from '@/stores/useSelfStore'
 
 const schema = object().shape({
     username: string().label('Username').required().min(2).max(16),
@@ -35,8 +33,8 @@ const schema = object().shape({
 })
 
 function Register() {
-    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const setSelf = useSelfStore((state) => state.setSelf)
 
     const [isPasswordVisible, , togglePasswordVisibility] = useBool()
     const [isConfirmPasswordVisible, , toggleConfirmPasswordVisibility] =
@@ -61,7 +59,7 @@ function Register() {
                 password: form.password,
             })
             const { user } = await userService.showSelf()
-            dispatch(setSelfUser(user))
+            setSelf(user)
             toast({
                 message:
                     'User registered successfully, please verify your email',

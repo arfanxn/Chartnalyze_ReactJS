@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router'
 import { string, object } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/stores'
 import classNames from 'classnames'
 // Services
 import * as userService from '@/services/userService'
@@ -26,6 +24,7 @@ import CIcon from '@/components/CIcon'
 import Header from '@/components/landing/Header'
 import Layout from '@/layouts/Layout'
 import axios from 'axios'
+import { useSelfStore } from '@/stores/useSelfStore'
 
 const schema = object().shape({
     code: string().label('Code').required().length(6),
@@ -33,7 +32,7 @@ const schema = object().shape({
 
 function Verify() {
     const navigate = useNavigate()
-    const self = useSelector((state: RootState) => state.user.self)
+    const self = useSelfStore((state) => state.self)
     const hasSent = useRef(false)
 
     const { countdown, isCountdowning, startCountdown, resetCountdown } =
