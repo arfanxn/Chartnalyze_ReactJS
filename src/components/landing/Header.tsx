@@ -3,21 +3,21 @@ import classNames from 'classnames'
 import { Link } from 'react-router'
 import CButton from '../CButton'
 import { forwardRef, HTMLProps } from 'react'
+import { useSelfStore } from '@/stores/useSelfStore'
 
 type Props = HTMLProps<HTMLElement>
 
 const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const appName = import.meta.env.VITE__APP_NAME
-    const navigations = [
-        {
-            label: 'Register',
-            url: '/users/register',
-        },
-        {
-            label: 'Login',
-            url: '/users/login',
-        },
-    ]
+
+    const self = useSelfStore((state) => state.self)
+
+    const navigations = self
+        ? [{ label: 'Dashboard', url: '/dashboard' }]
+        : [
+              { label: 'Register', url: '/users/register' },
+              { label: 'Login', url: '/users/login' },
+          ]
 
     return (
         <header
