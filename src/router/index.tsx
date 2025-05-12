@@ -30,13 +30,21 @@ export const router = createBrowserRouter([
                 element: <MiddlewareBoundary middlewares={[Authenticated]} />,
                 children: [
                     {
-                        path: 'verify',
                         element: (
                             <MiddlewareBoundary
                                 middlewares={[EmailNotVerified]}
-                                children={<Verify />}
                             />
                         ),
+                        children: [{ path: 'verify', element: <Verify /> }],
+                    },
+                    {
+                        element: (
+                            <MiddlewareBoundary middlewares={[EmailVerified]} />
+                        ),
+                        children: [
+                            { index: true, element: <UsersIndex /> },
+                            //
+                        ],
                     },
                 ],
             },
@@ -46,9 +54,6 @@ export const router = createBrowserRouter([
         element: (
             <MiddlewareBoundary middlewares={[Authenticated, EmailVerified]} />
         ),
-        children: [
-            { path: '/dashboard', element: <Dashboard /> },
-            { path: '/users', element: <UsersIndex /> },
-        ],
+        children: [{ path: 'dashboard', element: <Dashboard /> }],
     },
 ])
