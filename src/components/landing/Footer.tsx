@@ -21,6 +21,10 @@ const Footer = forwardRef<HTMLElement, Props>(
                 url: '/',
             },
             {
+                label: 'Dashboard',
+                url: '/dashboard',
+            },
+            {
                 label: 'Register',
                 url: '/users/register',
             },
