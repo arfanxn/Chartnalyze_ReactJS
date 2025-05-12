@@ -65,6 +65,8 @@ function Verify() {
     }
 
     const sendAction = useCallback(async () => {
+        if (self === null) return
+
         await otpService.send({ email: self!.email }).catch((e) => {
             if (axios.isAxiosError(e)) {
                 if (e.response?.status === 429) {
@@ -79,6 +81,8 @@ function Verify() {
     }, [self])
 
     const resendAction = async () => {
+        if (self === null) return
+
         try {
             resetCountdown()
             startCountdown()
@@ -117,7 +121,7 @@ function Verify() {
                         </h3>
                         <p className="inline-flex flex-col text-sm font-extralight text-black md:text-base">
                             <span>Enter the otp we sent to</span>
-                            <span className="text-primary">{self!.email}</span>
+                            <span className="text-primary">{self?.email}</span>
                         </p>
                     </header>
 
