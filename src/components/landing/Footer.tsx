@@ -53,7 +53,7 @@ const Footer = forwardRef<HTMLElement, Props>(
             <footer
                 ref={ref}
                 className={classNames(
-                    'absolute inset-x-0 top-full z-50 flex min-h-screen flex-col space-y-8 bg-white px-4 py-2 md:px-8 md:py-2',
+                    'min-h-screen space-y-8 bg-white px-4 py-2 md:px-8 md:py-2',
                     className,
                 )}
                 {...props}
