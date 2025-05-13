@@ -12,6 +12,9 @@ const Register = lazy(() => import('@/pages/users/Register'))
 const Verify = lazy(() => import('@/pages/users/Verify'))
 const Login = lazy(() => import('@/pages/users/Login'))
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
+const NotificationsIndex = lazy(
+    () => import('@/pages/notifications/NotificationsIndex'),
+)
 const UsersIndex = lazy(() => import('@/pages/UsersIndex'))
 
 export const router = createBrowserRouter([
@@ -54,6 +57,15 @@ export const router = createBrowserRouter([
         element: (
             <MiddlewareBoundary middlewares={[Authenticated, EmailVerified]} />
         ),
-        children: [{ path: 'dashboard', element: <Dashboard /> }],
+        children: [
+            { path: '/dashboard', element: <Dashboard /> },
+            {
+                path: '/notifications',
+                children: [
+                    { index: true, element: <NotificationsIndex /> },
+                    //
+                ],
+            },
+        ],
     },
 ])
