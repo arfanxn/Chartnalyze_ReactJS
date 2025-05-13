@@ -29,3 +29,8 @@ export type OnBlur = (event: React.FocusEvent<HTMLInputElement>) => void
 export type OnBlurProps = {
     onBlur?: OnBlur
 }
+
+export type OnOutsideClick<T = void> = (event: MouseEvent) => T
+export type OnOutsideClickProps = {
+    onOutsideClick?: OnOutsideClick
+}
