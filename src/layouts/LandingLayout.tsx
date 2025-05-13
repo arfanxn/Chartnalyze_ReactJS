@@ -33,8 +33,10 @@ const LandingLayout = forwardRef<HTMLDivElement, Props>(
                         'opacity-0': isFooterVisible,
                     })}
                 />
-                {props.children}
-                <Footer ref={footerRef} />
+                <main className="flex flex-col gap-y-16 px-4 md:gap-y-24 md:px-8">
+                    {props.children}
+                </main>
+                <Footer ref={footerRef} className="mt-16 md:mt-24" />
             </Layout>
         )
     },
