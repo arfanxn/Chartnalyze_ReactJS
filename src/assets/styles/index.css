@@ -1,5 +1,9 @@
 @import url('https://cdn.jsdelivr.net/npm/@vetixy/circular-std@1.0.0/dist/index.min.css');
 @import 'tailwindcss';
+@plugin 'tailwind-scrollbar' {
+    nocompatible: true;
+    preferredstrategy: 'pseudoelements';
+}
 
 @theme {
     /* Define font family */
