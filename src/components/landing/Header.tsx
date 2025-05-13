@@ -27,7 +27,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                 className,
             )}
         >
-            <nav className="mx-auto flex flex-row items-center justify-between px-4 py-2 md:px-8 lg:w-7xl">
+            <nav className="mx-auto flex flex-row items-center justify-between px-4 py-2 md:px-8 lg:max-w-7xl">
                 <Link to="/" className="inline-flex items-center">
                     <figure className="flex max-w-8 items-center justify-center md:max-w-10">
                         <TheLogo />
