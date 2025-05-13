@@ -41,7 +41,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                         <Link key={label} to={url}>
                             <CButton
                                 className={classNames(
-                                    'text-sm outline outline-neutral-500 md:text-base',
+                                    'text-sm outline outline-black md:text-base',
                                     {
                                         'bg-white! text-black!': index === 0,
                                     },
