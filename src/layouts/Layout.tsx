@@ -3,23 +3,24 @@ import { forwardRef, HTMLProps } from 'react'
 import { useCurrentRouteTitle } from '@/hooks/useCurrentRouteTitle'
 import { useScrollToTopOnRouteChange } from '@/hooks/useScrollToTopOnRouteChange'
 
-type Props = HTMLProps<HTMLElement>
+type Props = HTMLProps<HTMLDivElement>
 
-const Layout = forwardRef<HTMLElement, Props>(
+const Layout = forwardRef<HTMLDivElement, Props>(
     ({ className, ...props }, ref) => {
         useCurrentRouteTitle()
         useScrollToTopOnRouteChange()
 
         return (
-            <main
+            <div
                 ref={ref}
                 className={classNames(
-                    'relative mx-auto flex flex-col space-y-16 px-4 md:space-y-24 md:px-8 lg:max-w-7xl',
+                    'relative mx-auto lg:max-w-7xl',
                     className,
                 )}
+                {...props}
             >
                 {props.children}
-            </main>
+            </div>
         )
     },
 )
