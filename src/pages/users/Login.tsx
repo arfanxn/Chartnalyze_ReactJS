@@ -17,8 +17,7 @@ import CAlert from '@/components/CAlert'
 import CButton from '@/components/CButton'
 import CCard from '@/components/CCard'
 import CInputIconedLabeled from '@/components/CInputIconedLabeled'
-import Header from '@/components/landing/Header'
-import Layout from '@/layouts/Layout'
+import EntryLayout from '@/layouts/EntryLayout'
 import axios from 'axios'
 import { useSelfStore } from '@/stores/useSelfStore'
 
@@ -63,8 +62,7 @@ function Login() {
     }
 
     return (
-        <Layout>
-            <Header />
+        <EntryLayout>
             <section className="flex min-h-[100vh] flex-row items-center justify-center">
                 <CCard className="w-full space-y-4 p-8 md:my-24 md:w-[50%] lg:w-[33%]">
                     <h3 className="text-lg font-semibold text-black md:text-2xl">
@@ -134,7 +132,7 @@ function Login() {
                     </div>
                 </CCard>
             </section>
-        </Layout>
+        </EntryLayout>
     )
 }
 
