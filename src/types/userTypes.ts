@@ -6,5 +6,5 @@ export type User = {
     email: string
     emailVerifiedAt: string | null
     createdAt: string
-    updatedAt: string
+    updatedAt: string | null
 }
