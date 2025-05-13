@@ -1,15 +1,21 @@
-import { useSelector } from 'react-redux'
-import { RootState } from '@/stores'
-import Layout from '@/layouts/Layout'
+import DashboardLayout from '@/layouts/DashboardLayout'
+import { Link } from 'react-router'
+import { useSelfStore } from '@/stores/useSelfStore'
 
 function Dashboard() {
-    const user = useSelector((state: RootState) => state.user.self)
+    const self = useSelfStore((state) => state.self)
 
     return (
-        <Layout>
+        <DashboardLayout>
             <h1 className="text-primary text-4xl font-semibold">Dashboard</h1>
-            <p>{JSON.stringify(user)}</p>
-        </Layout>
+            <p className="block break-words">{JSON.stringify(self, null, 2)}</p>
+            <Link
+                className="bg-secondary rounded-md px-2 py-1 text-white"
+                to={'/users'}
+            >
+                UsersIndex
+            </Link>
+        </DashboardLayout>
     )
 }
 
