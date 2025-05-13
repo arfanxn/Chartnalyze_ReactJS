@@ -73,7 +73,9 @@ const CInputIconedLabeled = forwardRef<HTMLDivElement, Props>(
                 <div
                     className={classNames(
                         'flex flex-row items-center justify-between gap-x-1 rounded-md bg-white px-2 py-1 outline-1 transition-colors duration-150',
-                        isInputOnFocus ? 'outline-black' : 'outline-black/25',
+                        isInputOnFocus
+                            ? 'outline-black'
+                            : 'outline-neutral-300',
                     )}
                 >
                     <CInput

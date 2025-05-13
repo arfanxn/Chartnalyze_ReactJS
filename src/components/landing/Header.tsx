@@ -23,7 +23,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
         <header
             ref={ref}
             className={classNames(
-                'fixed inset-x-0 top-0 z-50 border-b border-black/25 bg-white',
+                'fixed inset-x-0 top-0 z-50 border-b border-neutral-300 bg-white',
                 className,
             )}
         >

@@ -8,7 +8,7 @@ const CInput = forwardRef<HTMLInputElement, Props>(
         <input
             ref={ref}
             className={classNames(
-                'rounded-md bg-white px-2 py-1 text-sm text-black outline outline-black/25 transition-transform duration-150 autofill:bg-white autofill:text-black focus:outline-black md:px-4 md:py-2 md:text-base',
+                'rounded-md bg-white px-2 py-1 text-sm text-black outline outline-neutral-200 transition-transform duration-150 autofill:bg-white autofill:text-black focus:outline-black md:px-4 md:py-2 md:text-base',
                 className,
             )}
             {...props} // includes all other props like onChange, value, etc.

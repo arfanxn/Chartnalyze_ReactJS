@@ -173,7 +173,7 @@ function Verify() {
                             )}
                         >
                             <CIcon
-                                className="text-black/25"
+                                className="text-neutral-300"
                                 icon="lucide:clock"
                             />
                             <span className="font-semibold text-black">
