@@ -7,17 +7,18 @@ import { useSelfStore } from '@/stores/useSelfStore'
 
 type Props = HTMLProps<HTMLElement>
 
+const GUEST_NAVIGATIONS = [
+    { label: 'Register', url: '/users/register' },
+    { label: 'Login', url: '/users/login' },
+]
+const AUTHENTICATED_NAVIGATIONS = [{ label: 'Dashboard', url: '/dashboard' }]
+
 const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const appName = import.meta.env.VITE__APP_NAME
 
     const self = useSelfStore((state) => state.self)
 
-    const navigations = self
-        ? [{ label: 'Dashboard', url: '/dashboard' }]
-        : [
-              { label: 'Register', url: '/users/register' },
-              { label: 'Login', url: '/users/login' },
-          ]
+    const navigations = self ? AUTHENTICATED_NAVIGATIONS : GUEST_NAVIGATIONS
 
     return (
         <header
