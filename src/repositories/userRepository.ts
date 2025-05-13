@@ -24,7 +24,7 @@ export const login = async (form: {
 }
 
 export const logout = async (): Promise<AxiosResponse<ResponseBody>> => {
-    const response = await axiosInstance.delete(`/api/users/logout`)
+    const response = await axiosInstance.delete(`/api/users/self/logout`)
     return response
 }
 
