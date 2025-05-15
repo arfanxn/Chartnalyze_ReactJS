@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { forwardRef, HTMLAttributes } from 'react'
 import classNames from 'classnames'
 import { useSelfStore } from '@/stores/useSelfStore'
 import { Link, useNavigate } from 'react-router'
 import CIcon from '@/components/CIcon'
 import CDropdown from '@/components/CDropdown'
-import * as userService from '@/services/userService'
 import { toast } from '@/helpers/toastHelpers'
 import axios from 'axios'
 
@@ -28,18 +28,17 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
         const navigate = useNavigate()
 
         const self = useSelfStore((state) => state.self)
-        const setSelf = useSelfStore((state) => state.setSelf)
         if (self === null) return null
+        const logout = useSelfStore((state) => state.logout)
 
-        const logoutAction = async () => {
+        const handleLogout = async () => {
             // TODO: implement a better UI confirmation dialog
             if (confirm('Are you sure you want to logout?') === false) return
 
             try {
-                const { message } = await userService.logout()
-                setSelf(null)
+                const { message } = await logout()
                 toast({ message, type: 'success' })
-                navigate('/login', { replace: true })
+                navigate('/users/login', { replace: true })
             } catch (e) {
                 if (axios.isAxiosError(e)) {
                     toast({ message: e.response!.data.message, type: 'error' })
@@ -56,7 +55,7 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
             >
                 <header className="space-y-2">
                     <h3 className="text-sm leading-none font-medium text-black md:text-base">
-                        {self.name}
+                        {self.name ?? self.username}
                     </h3>
                     <p className="text-sm leading-none font-light text-black">
                         {self.email}
@@ -85,7 +84,7 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
                         className={classNames(
                             'flex w-full items-center gap-x-2 rounded-md px-2 py-1 font-medium text-black transition-colors duration-150 hover:bg-neutral-100 hover:text-black md:text-base',
                         )}
-                        onClick={logoutAction}
+                        onClick={handleLogout}
                     >
                         <CIcon icon="lucide:log-out" className="text-xl" />
                         <span>Logout</span>

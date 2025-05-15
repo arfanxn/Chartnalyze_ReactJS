@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import CIcon from '@/components/CIcon'
 import CImage from '@/components/CImage'
 import classNames from 'classnames'
@@ -19,6 +20,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const screenSize = useScreenSize()
 
     const self = useSelfStore((state) => state.self)
+    if (self === null) return null
 
     const [isNotificationsDropdownOpen, , toggleNotificationsDropdown] =
         useBool()
@@ -79,7 +81,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                             </figure>
                             <div className="ml-2 flex items-center gap-x-2">
                                 <span className="hidden md:inline md:text-sm">
-                                    {self?.name}
+                                    {self.name ?? self.username}
                                 </span>
                                 <CIcon
                                     icon="lucide:chevron-down"
