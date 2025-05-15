@@ -1,3 +1,3 @@
 export type OtpCodeForm = {
-    code: string
+    code: number
 }
