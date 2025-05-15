@@ -16,7 +16,7 @@ const Guest: MiddlewareComponent = ({ next }) => {
 
         if (isGuest) next()
         else navigate('/dashboard', { replace: true })
-    }, [isGuest, navigate, next])
+    }, [isLoading, isGuest, navigate, next])
 
     return null
 }

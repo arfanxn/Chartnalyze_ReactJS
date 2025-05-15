@@ -15,7 +15,7 @@ const EmailNotVerified: MiddlewareComponent = ({ next }) => {
 
         if (isEmailNotVerified) next()
         else navigate(-1)
-    }, [isEmailNotVerified, navigate, next])
+    }, [isLoading, isEmailNotVerified, navigate, next])
 
     return null
 }
