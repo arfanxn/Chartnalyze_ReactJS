@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router'
 import { object, ref, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 // Services
-import * as userService from '@/services/userService'
 import {
     handleUnprocessableEntity,
     isUnprocessableEntity,
@@ -33,7 +32,7 @@ const schema = object().shape({
 
 function Register() {
     const navigate = useNavigate()
-    const setSelf = useSelfStore((state) => state.setSelf)
+    const onboard = useSelfStore((state) => state.onboard)
 
     const [isPasswordVisible, , togglePasswordVisibility] = useBool()
     const [isConfirmPasswordVisible, , toggleConfirmPasswordVisibility] =
@@ -49,22 +48,16 @@ function Register() {
         resolver: yupResolver(schema),
     })
 
-    const registerAction = async () => {
+    const handleRegister = async () => {
         try {
             const form = getValues()
-            await userService.register(form)
-            await userService.login({
-                identifier: form.username,
-                password: form.password,
-            })
-            const { user } = await userService.showSelf()
-            setSelf(user)
+            await onboard(form)
             toast({
                 message:
                     'User registered successfully, please verify your email',
                 type: 'success',
             })
-            navigate('/verify', { replace: true })
+            navigate('/users/self/email/verify', { replace: true })
         } catch (e: unknown) {
             if (axios.isAxiosError(e)) {
                 if (isUnprocessableEntity(e)) {
@@ -85,7 +78,7 @@ function Register() {
 
                     <form
                         className="space-y-4"
-                        onSubmit={handleSubmit(registerAction)}
+                        onSubmit={handleSubmit(handleRegister)}
                     >
                         <div className="space-y-1">
                             <CInputIconedLabeled

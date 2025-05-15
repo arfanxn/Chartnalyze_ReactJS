@@ -1,25 +1,20 @@
-// External libraries
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-// Services
-import * as userService from '@/services/userService'
 import {
     handleUnprocessableEntity,
     isUnprocessableEntity,
 } from '@/helpers/errorHelpers'
+import { useSelfStore } from '@/stores/useSelfStore'
 import { toast } from '@/helpers/toastHelpers'
-// Custom hooks
 import { useBool } from '@/hooks/useBool'
-// Components
 import CAlert from '@/components/CAlert'
 import CButton from '@/components/CButton'
 import CCard from '@/components/CCard'
 import CInputIconedLabeled from '@/components/CInputIconedLabeled'
 import EntryLayout from '@/layouts/EntryLayout'
 import axios from 'axios'
-import { useSelfStore } from '@/stores/useSelfStore'
 
 const schema = object().shape({
     identifier: string().label('Email or username').required().min(2).max(16),
@@ -28,7 +23,7 @@ const schema = object().shape({
 
 function Login() {
     const navigate = useNavigate()
-    const setSelf = useSelfStore((state) => state.setSelf)
+    const login = useSelfStore((state) => state.login)
 
     const [isPasswordVisible, , togglePasswordVisibility] = useBool()
     useBool()
@@ -43,12 +38,11 @@ function Login() {
         resolver: yupResolver(schema),
     })
 
-    const loginAction = async () => {
+    const handleLogin = async () => {
         try {
             const form = getValues()
-            const { message } = await userService.login(form)
-            const { user } = await userService.showSelf()
-            setSelf(user)
+            const { message } = await login(form)
+            // TODO: update toast implementation
             toast({ message, type: 'success' })
             navigate('/dashboard', { replace: true })
         } catch (e: unknown) {
@@ -71,7 +65,7 @@ function Login() {
 
                     <form
                         className="space-y-4"
-                        onSubmit={handleSubmit(loginAction)}
+                        onSubmit={handleSubmit(handleLogin)}
                     >
                         <div className="space-y-1">
                             <CInputIconedLabeled
