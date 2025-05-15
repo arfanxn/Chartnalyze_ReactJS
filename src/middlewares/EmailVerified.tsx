@@ -10,7 +10,7 @@ const EmailVerified: MiddlewareComponent = ({ next }) => {
 
     useEffect(() => {
         if (isEmailVerified) next()
-        else navigate('/users/verify')
+        else navigate('/users/self/email/verify')
     }, [isEmailVerified, navigate, next])
 
     return null
