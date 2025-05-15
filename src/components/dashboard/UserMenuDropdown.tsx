@@ -14,7 +14,7 @@ const NAVIGATIONS = [
     {
         label: 'Profile',
         icon: 'lucide:circle-user-round',
-        url: '/users/self/profile',
+        url: '/users/self/profile/edit',
     },
     {
         label: 'Settings',
