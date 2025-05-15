@@ -5,11 +5,13 @@ import { useLocation } from 'react-router'
 
 export type MiddlewareBoundaryProps = {
     children?: React.ReactNode
+    element?: React.JSX.Element
     middlewares?: MiddlewareComponent[]
 }
 
 const MiddlewareBoundary = ({
     children,
+    element,
     middlewares = [],
 }: MiddlewareBoundaryProps) => {
     const location = useLocation()
@@ -28,7 +30,7 @@ const MiddlewareBoundary = ({
                 <Middleware key={`${location.key}-${index}`} next={next} />
             ))}
 
-            {children || <Outlet />}
+            {children || element || <Outlet />}
         </>
     )
 }
