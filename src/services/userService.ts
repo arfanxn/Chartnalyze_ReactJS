@@ -40,10 +40,10 @@ export const logout = async (): Promise<{ message: string }> => {
     }
 }
 
-export const verify = async (
+export const verifySelfEmail = async (
     form: OtpCodeForm,
 ): Promise<{ message: string }> => {
-    const response = await userRepository.verify(form)
+    const response = await userRepository.verifySelfEmail(form)
     return {
         message: response.data.message,
     }

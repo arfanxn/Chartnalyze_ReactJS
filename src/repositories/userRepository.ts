@@ -32,7 +32,7 @@ export const logout = async (): Promise<AxiosResponse<ResponseBody>> => {
     return response
 }
 
-export const verify = async (
+export const verifySelfEmail = async (
     form: OtpCodeForm,
 ): Promise<AxiosResponse<ResponseBody>> => {
     const response = await axiosInstance.post(
