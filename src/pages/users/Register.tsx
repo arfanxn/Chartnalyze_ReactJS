@@ -135,7 +135,7 @@ function Register() {
 
                     <p className="text-center text-base font-semibold text-black">
                         Already have an account?{' '}
-                        <Link to="/login" className="text-primary">
+                        <Link to="/users/login" className="text-primary">
                             Login
                         </Link>
                     </p>
