@@ -4,7 +4,9 @@ import SelfProfileEditCard from '@/components/users/SelfProfileEditCard'
 function SelfProfileEdit() {
     return (
         <DashboardLayout>
-            <h1 className="text-primary text-2xl font-semibold">Profile</h1>
+            <header>
+                <h2 className="text-primary text-2xl font-semibold">Profile</h2>
+            </header>
 
             <SelfProfileEditCard />
         </DashboardLayout>
