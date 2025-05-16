@@ -81,9 +81,9 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                             </figure>
                             <div className="ml-2 flex items-center gap-x-2">
                                 <span className="hidden md:inline md:text-sm">
-                                    {isSelfLoading
+                                    {isSelfLoading || !self
                                         ? '...'
-                                        : (self!.name ?? self!.username)}
+                                        : (self.name ?? self.username)}
                                 </span>
                                 <CIcon
                                     icon="lucide:chevron-down"
