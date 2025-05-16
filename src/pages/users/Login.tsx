@@ -96,7 +96,7 @@ function Login() {
                     </form>
 
                     <div className="flex flex-col items-center space-y-0 gap-y-0">
-                        <Link to="/forgot-password">
+                        <Link to="/users/forgot-password/flows/first">
                             <p className="text-base font-semibold text-black">
                                 Forgot password?
                             </p>
