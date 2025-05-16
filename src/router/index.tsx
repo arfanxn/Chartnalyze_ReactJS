@@ -16,7 +16,7 @@ const NotificationsIndex = lazy(
     () => import('@/pages/notifications/NotificationsIndex'),
 )
 const UsersIndex = lazy(() => import('@/pages/users/UsersIndex'))
-const SelfProfileEdit = lazy(() => import('@/pages/users/SelfProfileEdit'))
+const SelfAccountEdit = lazy(() => import('@/pages/users/SelfAccountEdit'))
 const SelfEmailEdit = lazy(() => import('@/pages/users/SelfEmailEdit'))
 const SelfSettingsEdit = lazy(() => import('@/pages/users/SelfSettingsEdit'))
 
@@ -58,8 +58,8 @@ export const router = createBrowserRouter([
                                 path: 'self',
                                 children: [
                                     {
-                                        path: 'profile/edit',
-                                        element: <SelfProfileEdit />,
+                                        path: 'account/edit',
+                                        element: <SelfAccountEdit />,
                                     },
                                     {
                                         path: 'email/edit',
