@@ -18,7 +18,7 @@ function SelfEmailEdit() {
     const handle = async (form: { email: string; code: number }) => {
         const { message } = await updateSelfEmail(form)
         toast({ message, type: 'success' })
-        navigate('/users/self/profile/edit', { replace: true })
+        navigate('/users/self/account/edit', { replace: true })
     }
 
     return (
