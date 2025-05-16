@@ -1,11 +1,11 @@
 import DashboardLayout from '@/layouts/DashboardLayout'
 import SelfProfileEditCard from '@/components/users/SelfProfileEditCard'
 
-function SelfProfileEdit() {
+function SelfAccountEdit() {
     return (
         <DashboardLayout>
             <header>
-                <h2 className="text-primary text-2xl font-semibold">Profile</h2>
+                <h2 className="text-primary text-2xl font-semibold">Account</h2>
             </header>
 
             <SelfProfileEditCard />
@@ -13,6 +13,6 @@ function SelfProfileEdit() {
     )
 }
 
-SelfProfileEdit.displayName = 'SelfProfileEdit'
+SelfAccountEdit.displayName = 'SelfAccountEdit'
 
-export default SelfProfileEdit
+export default SelfAccountEdit
