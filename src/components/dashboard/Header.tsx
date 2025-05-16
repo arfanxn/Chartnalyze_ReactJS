@@ -20,7 +20,6 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const screenSize = useScreenSize()
 
     const self = useSelfStore((state) => state.self)
-    if (self === null) return null
 
     const [isNotificationsDropdownOpen, , toggleNotificationsDropdown] =
         useBool()
@@ -30,6 +29,8 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
         if (['xs', 'sm'].includes(screenSize)) navigate('/notifications')
         else toggleNotificationsDropdown()
     }
+
+    if (self === null) return null
 
     return (
         <header
