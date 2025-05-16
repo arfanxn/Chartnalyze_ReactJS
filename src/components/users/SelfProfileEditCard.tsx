@@ -133,9 +133,15 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
         return (
             <CCard
                 ref={ref}
-                className={classNames('px-6 py-4', className)}
+                className={classNames('space-y-4 px-6 py-4', className)}
                 {...props}
             >
+                <header>
+                    <h3 className="text-primary text-2xl font-semibold">
+                        Profile
+                    </h3>
+                </header>
+
                 <form
                     className="flex flex-col gap-4"
                     onSubmit={handleSubmit(handleUpdate)}
@@ -143,7 +149,7 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
                     <div className="grid grid-cols-1 items-center gap-x-4 lg:grid-cols-[auto_1fr] lg:items-start">
                         <div className="relative flex flex-col items-center justify-center">
                             <div className="relative">
-                                <figure className="size-40 overflow-hidden rounded-full outline outline-black md:size-40">
+                                <figure className="size-50 overflow-hidden rounded-full outline outline-black md:size-40">
                                     <CImage
                                         src="https://react-demo.tailadmin.com/images/user/owner.jpg"
                                         alt="User avatar"
@@ -152,11 +158,11 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
                                 </figure>
                                 <label
                                     htmlFor={avatarInputId}
-                                    className="absolute right-0 bottom-0 -translate-x-1/4 -translate-y-1/4 cursor-pointer rounded-full border border-black bg-white p-1 shadow-sm"
+                                    className="absolute right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-black bg-white p-1 shadow-sm md:-translate-x-1/4 md:-translate-y-1/4"
                                 >
                                     <CIcon
                                         icon="lucide:upload"
-                                        className="text-xl text-black"
+                                        className="text-2xl text-black md:text-xl"
                                     />
                                 </label>
                             </div>
