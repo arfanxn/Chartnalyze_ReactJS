@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useNavigate } from 'react-router'
 import { toast } from '@/helpers/toastHelpers'
 import EntryLayout from '@/layouts/EntryLayout'
