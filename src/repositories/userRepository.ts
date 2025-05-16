@@ -66,6 +66,6 @@ export const updateSelfEmail = async (
 export const updateSelfPassword = async (
     form: UpdateSelfPasswordForm,
 ): Promise<AxiosResponse<ResponseBody>> => {
-    const response = await axiosInstance.put(`/api/users/self/email`, form)
+    const response = await axiosInstance.patch(`/api/users/self/password`, form)
     return response
 }
