@@ -13,9 +13,9 @@ type Props = HTMLAttributes<HTMLDivElement>
 
 const NAVIGATIONS = [
     {
-        label: 'Profile',
+        label: 'Account',
         icon: 'lucide:circle-user-round',
-        url: '/users/self/profile/edit',
+        url: '/users/self/account/edit',
     },
     {
         label: 'Settings',
