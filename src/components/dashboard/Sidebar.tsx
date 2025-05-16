@@ -1,8 +1,6 @@
 import classNames from 'classnames'
-import { Link } from 'react-router'
 import { forwardRef, HTMLProps } from 'react'
-import CIcon from '../CIcon'
-import { useLocation } from 'react-router'
+import NavigationLink from '@/components/dashboard/NavigationLink'
 
 type Props = HTMLProps<HTMLElement>
 
@@ -52,8 +50,6 @@ const NAVIGATIONS: NavigationGroup[] = [
 
 const Sidebar = forwardRef<HTMLElement, Props>(
     ({ className, ...props }, ref) => {
-        const location = useLocation()
-
         return (
             <aside
                 ref={ref}
@@ -72,21 +68,12 @@ const Sidebar = forwardRef<HTMLElement, Props>(
                             <ul className="mt-2 space-y-2">
                                 {items.map(({ label, icon, url }) => (
                                     <li key={url}>
-                                        <Link
-                                            className={classNames(
-                                                'ml-2 flex items-center gap-x-2 rounded-md px-2 py-1 font-medium transition-colors duration-150 md:text-lg',
-                                                location.pathname === url
-                                                    ? 'text-primary bg-primary/10'
-                                                    : 'text-black hover:bg-neutral-100',
-                                            )}
+                                        <NavigationLink
+                                            className="ml-2 md:text-lg"
                                             to={url}
-                                        >
-                                            <CIcon
-                                                icon={icon}
-                                                className="text-xl"
-                                            />
-                                            <span>{label}</span>
-                                        </Link>
+                                            label={label}
+                                            icon={icon}
+                                        />
                                     </li>
                                 ))}
                             </ul>

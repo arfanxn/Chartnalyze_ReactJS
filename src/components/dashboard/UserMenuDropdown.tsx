@@ -1,13 +1,13 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { forwardRef, HTMLAttributes } from 'react'
 import classNames from 'classnames'
 import { useSelfStore } from '@/stores/useSelfStore'
-import { Link, useNavigate } from 'react-router'
-import CIcon from '@/components/CIcon'
+import { useNavigate } from 'react-router'
 import CDropdown from '@/components/CDropdown'
 import { toast } from '@/helpers/toastHelpers'
 import axios from 'axios'
 import { useLoadingsStore } from '@/stores/useLoadingsStore'
+import NavigationLink from './NavigationLink'
+import NavigationButton from './NavigationButton'
 
 type Props = HTMLAttributes<HTMLDivElement>
 
@@ -67,33 +67,27 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
                     </p>
                 </header>
 
-                <nav className="mt-4 space-y-2">
+                <nav className="mt-4 flex flex-col gap-y-2">
                     {NAVIGATIONS.map(({ label, icon, url }) => (
-                        <Link
+                        <NavigationLink
+                            className="text-sm md:text-base"
                             key={url}
-                            className={classNames(
-                                'flex w-full items-center gap-x-2 rounded-md px-2 py-1 font-medium text-black transition-colors duration-150 hover:bg-neutral-100 hover:text-black md:text-base',
-                            )}
+                            label={label}
+                            icon={icon}
                             to={url}
-                        >
-                            <CIcon icon={icon} className="text-xl" />
-                            {label}
-                        </Link>
+                        />
                     ))}
                 </nav>
 
                 <hr className="border-0.5 border-neutral-300" />
 
                 <footer>
-                    <button
-                        className={classNames(
-                            'flex w-full items-center gap-x-2 rounded-md px-2 py-1 font-medium text-black transition-colors duration-150 hover:bg-neutral-100 hover:text-black md:text-base',
-                        )}
+                    <NavigationButton
                         onClick={handleLogout}
-                    >
-                        <CIcon icon="lucide:log-out" className="text-xl" />
-                        <span>Logout</span>
-                    </button>
+                        label="Logout"
+                        icon="lucide:log-out"
+                        className="text-sm md:text-base"
+                    />
                 </footer>
             </CDropdown>
         )
