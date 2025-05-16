@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { forwardRef, HTMLAttributes, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import { useSelfStore } from '@/stores/useSelfStore'
