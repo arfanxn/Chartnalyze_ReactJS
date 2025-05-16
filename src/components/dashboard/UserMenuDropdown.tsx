@@ -20,7 +20,7 @@ const NAVIGATIONS = [
     {
         label: 'Settings',
         icon: 'lucide:settings',
-        url: '/users/self/settings',
+        url: '/users/self/settings/edit',
     },
 ]
 
