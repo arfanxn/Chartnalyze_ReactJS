@@ -4,14 +4,13 @@ import { toast } from '@/helpers/toastHelpers'
 import EntryLayout from '@/layouts/EntryLayout'
 import { useSelfStore } from '@/stores/useSelfStore'
 import VerifyCard from '@/components/users/VerifyCard'
+import { useLoadingsStore } from '@/stores/useLoadingsStore'
 
 function SelfEmailVerify() {
-    console.log('SelfEmailVerify is mounted')
-
     const navigate = useNavigate()
 
     const self = useSelfStore((state) => state.self)
-    if (self === null) return null
+    const isSelfLoading = useLoadingsStore((state) => state.isLoading('self'))
     const verifySelfEmail = useSelfStore((state) => state.verifyEmail)
 
     const handle = async (form: { code: number }) => {
@@ -19,6 +18,10 @@ function SelfEmailVerify() {
         toast({ message, type: 'success' })
         navigate('/dashboard', { replace: true })
     }
+
+    // TODO: implement better UIs for loading and errors
+    if (isSelfLoading) return <div>Loading...</div>
+    if (!self) return <div>Error...</div>
 
     return (
         <EntryLayout>

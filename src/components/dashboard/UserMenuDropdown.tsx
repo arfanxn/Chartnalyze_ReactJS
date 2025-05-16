@@ -7,6 +7,7 @@ import CIcon from '@/components/CIcon'
 import CDropdown from '@/components/CDropdown'
 import { toast } from '@/helpers/toastHelpers'
 import axios from 'axios'
+import { useLoadingsStore } from '@/stores/useLoadingsStore'
 
 type Props = HTMLAttributes<HTMLDivElement>
 
@@ -28,7 +29,9 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
         const navigate = useNavigate()
 
         const self = useSelfStore((state) => state.self)
-        if (self === null) return null
+        const isSelfLoading = useLoadingsStore((state) =>
+            state.isLoading('self'),
+        )
         const logout = useSelfStore((state) => state.logout)
 
         const handleLogout = async () => {
@@ -55,10 +58,12 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
             >
                 <header className="space-y-2">
                     <h3 className="text-sm leading-none font-medium text-black md:text-base">
-                        {self.name ?? self.username}
+                        {isSelfLoading || !self
+                            ? '...'
+                            : (self.name ?? self.username)}
                     </h3>
                     <p className="text-sm leading-none font-light text-black">
-                        {self.email}
+                        {isSelfLoading || !self ? '...' : self.email}
                     </p>
                 </header>
 

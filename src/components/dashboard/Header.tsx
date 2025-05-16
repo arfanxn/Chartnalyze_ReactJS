@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import CIcon from '@/components/CIcon'
 import CImage from '@/components/CImage'
 import classNames from 'classnames'
@@ -10,6 +9,7 @@ import TheLogo from '@/components/TheLogo'
 import { useBool } from '@/hooks/useBool'
 import { useSelfStore } from '@/stores/useSelfStore'
 import { useScreenSize } from '@/hooks/useScreenSize'
+import { useLoadingsStore } from '@/stores/useLoadingsStore'
 
 type Props = HTMLProps<HTMLElement>
 
@@ -20,6 +20,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
     const screenSize = useScreenSize()
 
     const self = useSelfStore((state) => state.self)
+    const isSelfLoading = useLoadingsStore((state) => state.isLoading('self'))
 
     const [isNotificationsDropdownOpen, , toggleNotificationsDropdown] =
         useBool()
@@ -29,8 +30,6 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
         if (['xs', 'sm'].includes(screenSize)) navigate('/notifications')
         else toggleNotificationsDropdown()
     }
-
-    if (self === null) return null
 
     return (
         <header
@@ -82,7 +81,9 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                             </figure>
                             <div className="ml-2 flex items-center gap-x-2">
                                 <span className="hidden md:inline md:text-sm">
-                                    {self.name ?? self.username}
+                                    {isSelfLoading
+                                        ? '...'
+                                        : (self!.name ?? self!.username)}
                                 </span>
                                 <CIcon
                                     icon="lucide:chevron-down"
