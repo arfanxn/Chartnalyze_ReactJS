@@ -9,13 +9,15 @@ import EmailNotVerified from '@/middlewares/EmailNotVerified'
 // Lazy-loaded components
 const Landing = lazy(() => import('@/pages/Landing'))
 const Register = lazy(() => import('@/pages/users/Register'))
-const Verify = lazy(() => import('@/pages/users/Verify'))
+const SelfEmailVerify = lazy(() => import('@/pages/users/SelfEmailVerify'))
 const Login = lazy(() => import('@/pages/users/Login'))
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
 const NotificationsIndex = lazy(
     () => import('@/pages/notifications/NotificationsIndex'),
 )
-const UsersIndex = lazy(() => import('@/pages/UsersIndex'))
+const UsersIndex = lazy(() => import('@/pages/users/UsersIndex'))
+const SelfProfileEdit = lazy(() => import('@/pages/users/SelfProfileEdit'))
+const SelfEmailEdit = lazy(() => import('@/pages/users/SelfEmailEdit'))
 
 export const router = createBrowserRouter([
     { path: '/', element: <Landing /> },
@@ -38,7 +40,12 @@ export const router = createBrowserRouter([
                                 middlewares={[EmailNotVerified]}
                             />
                         ),
-                        children: [{ path: 'verify', element: <Verify /> }],
+                        children: [
+                            {
+                                path: 'self/email/verify',
+                                element: <SelfEmailVerify />,
+                            },
+                        ],
                     },
                     {
                         element: (
@@ -46,6 +53,19 @@ export const router = createBrowserRouter([
                         ),
                         children: [
                             { index: true, element: <UsersIndex /> },
+                            {
+                                path: 'self',
+                                children: [
+                                    {
+                                        path: 'profile/edit',
+                                        element: <SelfProfileEdit />,
+                                    },
+                                    {
+                                        path: 'email/edit',
+                                        element: <SelfEmailEdit />,
+                                    },
+                                ],
+                            },
                             //
                         ],
                     },
