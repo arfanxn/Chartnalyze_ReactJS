@@ -8,11 +8,11 @@ import {
 } from '@/helpers/errorHelpers'
 import { useSelfStore } from '@/stores/useSelfStore'
 import { toast } from '@/helpers/toastHelpers'
-import { useBool } from '@/hooks/useBool'
 import CAlert from '@/components/CAlert'
 import CButton from '@/components/CButton'
 import CCard from '@/components/CCard'
 import CInputIconedLabeled from '@/components/CInputIconedLabeled'
+import CInputPassword from '@/components/CInputPassword'
 import EntryLayout from '@/layouts/EntryLayout'
 import axios from 'axios'
 
@@ -24,9 +24,6 @@ const schema = object().shape({
 function Login() {
     const navigate = useNavigate()
     const login = useSelfStore((state) => state.login)
-
-    const [isPasswordVisible, , togglePasswordVisibility] = useBool()
-    useBool()
 
     const {
         register: registerInput,
@@ -42,7 +39,6 @@ function Login() {
         try {
             const form = getValues()
             const { message } = await login(form)
-            // TODO: update toast implementation
             toast({ message, type: 'success' })
             navigate('/dashboard', { replace: true })
         } catch (e: unknown) {
@@ -80,19 +76,11 @@ function Login() {
                             )}
                         </div>
                         <div className="space-y-1">
-                            <CInputIconedLabeled
+                            <CInputPassword
                                 label="Password"
                                 inputProps={{
                                     ...registerInput('password'),
-                                    autoComplete: 'off',
-                                    type: isPasswordVisible
-                                        ? 'text'
-                                        : 'password',
                                 }}
-                                icon={`lucide:${isPasswordVisible ? 'eye' : 'eye-closed'}`}
-                                iconOnClick={
-                                    togglePasswordVisibility as () => void
-                                }
                             />
                             {errors.password && (
                                 <CAlert

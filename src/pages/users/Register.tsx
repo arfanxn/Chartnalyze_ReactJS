@@ -9,8 +9,6 @@ import {
     isUnprocessableEntity,
 } from '@/helpers/errorHelpers'
 import { toast } from '@/helpers/toastHelpers'
-// Custom hooks
-import { useBool } from '@/hooks/useBool'
 // Components
 import CAlert from '@/components/CAlert'
 import CButton from '@/components/CButton'
@@ -19,6 +17,7 @@ import CInputIconedLabeled from '@/components/CInputIconedLabeled'
 import EntryLayout from '@/layouts/EntryLayout'
 import axios from 'axios'
 import { useSelfStore } from '@/stores/useSelfStore'
+import CInputPassword from '@/components/CInputPassword'
 
 const schema = object().shape({
     username: string().label('Username').required().min(2).max(16),
@@ -33,10 +32,6 @@ const schema = object().shape({
 function Register() {
     const navigate = useNavigate()
     const onboard = useSelfStore((state) => state.onboard)
-
-    const [isPasswordVisible, , togglePasswordVisibility] = useBool()
-    const [isConfirmPasswordVisible, , toggleConfirmPasswordVisibility] =
-        useBool()
 
     const {
         register: registerInput,
@@ -105,19 +100,11 @@ function Register() {
                             )}
                         </div>
                         <div className="space-y-1">
-                            <CInputIconedLabeled
+                            <CInputPassword
                                 label="Password"
                                 inputProps={{
                                     ...registerInput('password'),
-                                    autoComplete: 'off',
-                                    type: isPasswordVisible
-                                        ? 'text'
-                                        : 'password',
                                 }}
-                                icon={`lucide:${isPasswordVisible ? 'eye' : 'eye-closed'}`}
-                                iconOnClick={
-                                    togglePasswordVisibility as () => void
-                                }
                             />
                             {errors.password && (
                                 <CAlert
@@ -127,19 +114,11 @@ function Register() {
                             )}
                         </div>
                         <div className="space-y-1">
-                            <CInputIconedLabeled
+                            <CInputPassword
                                 label="Confirm Password"
                                 inputProps={{
                                     ...registerInput('confirmPassword'),
-                                    autoComplete: 'off',
-                                    type: isConfirmPasswordVisible
-                                        ? 'text'
-                                        : 'password',
                                 }}
-                                icon={`lucide:${isConfirmPasswordVisible ? 'eye' : 'eye-closed'}`}
-                                iconOnClick={
-                                    toggleConfirmPasswordVisibility as () => void
-                                }
                             />
                             {errors.confirmPassword && (
                                 <CAlert
