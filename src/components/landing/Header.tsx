@@ -40,12 +40,9 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                     {navigations.map(({ label, url }, index) => (
                         <Link key={label} to={url}>
                             <CButton
-                                className={classNames(
-                                    'text-sm outline outline-black md:text-base',
-                                    {
-                                        'bg-white! text-black!': index === 0,
-                                    },
-                                )}
+                                className={classNames('text-sm md:text-base', {
+                                    'bg-white! text-black!': index === 0,
+                                })}
                             >
                                 {label}
                             </CButton>

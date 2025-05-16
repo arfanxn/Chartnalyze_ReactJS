@@ -128,7 +128,7 @@ const NotificationsDropdown = forwardRef<HTMLDivElement, Props>(
                     <Link to="/notifications">
                         <CButton
                             className={classNames(
-                                'w-full bg-white! text-sm text-black! outline outline-black md:text-base',
+                                'w-full bg-white! text-sm text-black! md:text-base',
                             )}
                         >
                             View all notifications
