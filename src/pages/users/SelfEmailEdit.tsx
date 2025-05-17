@@ -1,16 +1,14 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useNavigate } from 'react-router'
 import { toast } from '@/helpers/toastHelpers'
 import EntryLayout from '@/layouts/EntryLayout'
 import { useSelfStore } from '@/stores/useSelfStore'
 import VerifyCard from '@/components/users/VerifyCard'
 import { useLocation } from 'react-router'
+import { useEffect } from 'react'
 
 function SelfEmailEdit() {
-    const { search } = useLocation()
-    const query = new URLSearchParams(search)
-    const email = query.get('email')
-    if (!email) return null
+    const { state } = useLocation()
+    const email = state?.form?.email as string | undefined
     const navigate = useNavigate()
 
     const updateSelfEmail = useSelfStore((state) => state.updateEmail)
@@ -20,6 +18,16 @@ function SelfEmailEdit() {
         toast({ message, type: 'success' })
         navigate('/users/self/account/edit', { replace: true })
     }
+
+    useEffect(() => {
+        if (!email)
+            navigate('/users/self/account/edit', {
+                replace: true,
+                state: { form: { email } },
+            })
+    }, [email, navigate])
+
+    if (!email) return <div>Error...</div>
 
     return (
         <EntryLayout>

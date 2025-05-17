@@ -101,8 +101,9 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
                             'Your new email address will not be updated until you verify it.',
                         type: 'warning',
                     })
-                    navigate(`/users/self/email/edit?email=${email}`, {
+                    navigate(`/users/self/email/edit`, {
                         replace: true,
+                        state: { form: { email } },
                     })
                 }
             } catch (e) {
