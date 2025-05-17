@@ -5,9 +5,9 @@ import {
     LoginForm,
     OtpCodeForm,
     RegisterForm,
+    ResetPasswordForm,
     UpdateSelfEmailForm,
     UpdateSelfForm,
-    UpdateSelfPasswordForm,
 } from '@/types/formTypes'
 
 export const register = async (
@@ -35,6 +35,13 @@ export const login = async (form: LoginForm): Promise<{ message: string }> => {
 export const logout = async (): Promise<{ message: string }> => {
     const response = await userRepository.logout()
     Cookies.remove('access_token')
+    return {
+        message: response.data.message,
+    }
+}
+
+export const resetPassword = async (form: ResetPasswordForm) => {
+    const response = await userRepository.resetPassword(form)
     return {
         message: response.data.message,
     }
@@ -70,12 +77,5 @@ export const updateSelfEmail = async (form: UpdateSelfEmailForm) => {
     return {
         message: response.data.message,
         user: response.data.data.user,
-    }
-}
-
-export const updateSelfPassword = async (form: UpdateSelfPasswordForm) => {
-    const response = await userRepository.updateSelfPassword(form)
-    return {
-        message: response.data.message,
     }
 }

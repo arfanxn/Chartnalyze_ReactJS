@@ -10,6 +10,13 @@ export type LoginForm = {
     password: string
 }
 
+export type ResetPasswordForm = {
+    email: string
+    password: string
+    confirmPassword: string
+    code: number
+}
+
 export type UpdateSelfForm = {
     name: string | null
     birthDate: string | null
@@ -19,10 +26,4 @@ export type UpdateSelfForm = {
 export type UpdateSelfEmailForm = {
     email: string
     code: number
-}
-
-export type UpdateSelfPasswordForm = {
-    currentPassword: string
-    password: string
-    confirmPassword: string
 }
