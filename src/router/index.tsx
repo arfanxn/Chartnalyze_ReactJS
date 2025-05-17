@@ -11,6 +11,15 @@ const Landing = lazy(() => import('@/pages/Landing'))
 const Register = lazy(() => import('@/pages/users/Register'))
 const SelfEmailVerify = lazy(() => import('@/pages/users/SelfEmailVerify'))
 const Login = lazy(() => import('@/pages/users/Login'))
+const ForgotPasswordFirstFlow = lazy(
+    () => import('@/pages/users/ForgotPasswordFirstFlow'),
+)
+const ForgotPasswordSecondFlow = lazy(
+    () => import('@/pages/users/ForgotPasswordSecondFlow'),
+)
+const ForgotPasswordLastFlow = lazy(
+    () => import('@/pages/users/ForgotPasswordLastFlow'),
+)
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
 const NotificationsIndex = lazy(
     () => import('@/pages/notifications/NotificationsIndex'),
@@ -30,6 +39,23 @@ export const router = createBrowserRouter([
                 children: [
                     { path: 'register', element: <Register /> },
                     { path: 'login', element: <Login /> },
+                    {
+                        path: 'forgot-password/flows',
+                        children: [
+                            {
+                                path: 'first',
+                                element: <ForgotPasswordFirstFlow />,
+                            },
+                            {
+                                path: 'second',
+                                element: <ForgotPasswordSecondFlow />,
+                            },
+                            {
+                                path: 'last',
+                                element: <ForgotPasswordLastFlow />,
+                            },
+                        ],
+                    },
                 ],
             },
             {
