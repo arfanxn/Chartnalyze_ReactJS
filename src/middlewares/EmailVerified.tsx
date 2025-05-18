@@ -14,8 +14,12 @@ const EmailVerified: MiddlewareComponent = ({ next }) => {
         if (isLoading) return
 
         if (isEmailVerified) next()
-        else navigate('/users/self/email/verify')
-    }, [isLoading, isEmailVerified, navigate, next])
+        else
+            navigate('/otps/verify?action=verify-self-email', {
+                replace: true,
+                state: { form: { email: self?.email } },
+            })
+    }, [isLoading, isEmailVerified, self, navigate, next])
 
     return null
 }
