@@ -52,7 +52,10 @@ function Register() {
                     'User registered successfully, please verify your email',
                 type: 'success',
             })
-            navigate('/users/self/email/verify', { replace: true })
+            navigate('/otps/verify?action=verify-self-email', {
+                replace: true,
+                state: { form },
+            })
         } catch (e: unknown) {
             if (axios.isAxiosError(e)) {
                 if (isUnprocessableEntity(e)) {
