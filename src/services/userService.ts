@@ -8,6 +8,7 @@ import {
     ResetPasswordForm,
     UpdateSelfEmailForm,
     UpdateSelfForm,
+    UpdateSelfPasswordForm,
 } from '@/types/formTypes'
 
 export const register = async (
@@ -77,5 +78,12 @@ export const updateSelfEmail = async (form: UpdateSelfEmailForm) => {
     return {
         message: response.data.message,
         user: response.data.data.user,
+    }
+}
+
+export const updateSelfPassword = async (form: UpdateSelfPasswordForm) => {
+    const response = await userRepository.updateSelfPassword(form)
+    return {
+        message: response.data.message,
     }
 }

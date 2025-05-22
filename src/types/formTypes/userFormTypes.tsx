@@ -27,3 +27,9 @@ export type UpdateSelfEmailForm = {
     email: string
     code: number
 }
+
+export type UpdateSelfPasswordForm = {
+    currentPassword: string
+    password: string
+    confirmPassword: string
+}

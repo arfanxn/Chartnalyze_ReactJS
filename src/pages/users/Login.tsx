@@ -17,7 +17,7 @@ import EntryLayout from '@/layouts/EntryLayout'
 import axios from 'axios'
 
 const schema = object().shape({
-    identifier: string().label('Email or username').required().min(2).max(16),
+    identifier: string().label('Email or username').required().min(2).max(50),
     password: string().label('Password').required().min(8).max(50),
 })
 

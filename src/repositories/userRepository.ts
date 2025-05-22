@@ -9,6 +9,7 @@ import {
     ResetPasswordForm,
     UpdateSelfEmailForm,
     UpdateSelfForm,
+    UpdateSelfPasswordForm,
 } from '@/types/formTypes'
 
 // TODO: Save user data into local storage or other solution is to fetch user data from backend on every page reload
@@ -70,5 +71,12 @@ export const updateSelfEmail = async (
     form: UpdateSelfEmailForm,
 ): Promise<AxiosResponse<ResponseBodyData<{ user: User }>>> => {
     const response = await axiosInstance.patch(`/api/users/self/email`, form)
+    return response
+}
+
+export const updateSelfPassword = async (
+    form: UpdateSelfPasswordForm,
+): Promise<AxiosResponse<ResponseBody>> => {
+    const response = await axiosInstance.patch(`/api/users/self/password`, form)
     return response
 }

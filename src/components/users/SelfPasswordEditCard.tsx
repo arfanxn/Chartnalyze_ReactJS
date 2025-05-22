@@ -48,7 +48,7 @@ const SelfPasswordEditCard = forwardRef<HTMLDivElement, Props>(
             try {
                 if (self === null) return
 
-                const form = getValues()
+                const form = { ...getValues() }
                 const { message } = await userService.updateSelfPassword(form)
                 toast({ message, type: 'success' })
                 navigate('/dashboard', { replace: true })
