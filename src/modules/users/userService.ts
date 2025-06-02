@@ -1,15 +1,13 @@
 import Cookies from 'js-cookie'
-import { User } from '@/types/userTypes'
+import { User } from '@/modules/users/User'
 import * as userRepository from '@/modules/users/userRepository'
-import {
-    LoginForm,
-    OtpCodeForm,
-    RegisterForm,
-    ResetPasswordForm,
-    UpdateSelfEmailForm,
-    UpdateSelfForm,
-    UpdateSelfPasswordForm,
-} from '@/types/formTypes'
+import { LoginForm } from '@/features/login/types/LoginForm'
+import { OtpCodeForm } from '@/features/otpVerification/types/OtpCodeForm'
+import { RegisterForm } from '@/features/register/types/RegisterForm'
+import { UpdateSelfForm } from '@/features/selfEdit/types/UpdateSelfForm'
+import { UpdateSelfEmailForm } from '@/features/selfEdit/types/UpdateSelfEmailForm'
+import { ResetPasswordForm } from '@/features/resetPassword/types/ResetPasswordForm'
+import { UpdateSelfPasswordForm } from '@/features/selfSettingsEdit/types/UpdateSelfPasswordForm'
 
 export const register = async (
     form: RegisterForm,
