@@ -1,9 +1,9 @@
 // App.tsx
-import '@/assets/styles/index.css'
+import '@/core/assets/styles/index.css'
 import { RouterProvider } from 'react-router'
 import { Suspense } from 'react'
-import CToastContainer from '@/components/CToastContainer'
-import { router } from '@/router'
+import CToastContainer from '@/shared/components/CToastContainer'
+import { router } from '@/core/router'
 
 const App = () => {
     return (
