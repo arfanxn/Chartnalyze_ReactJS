@@ -1,3 +1,5 @@
+import { Pagination } from '@/shared/types/paginations'
+
 export type ResponseBody = {
     message: string
     status: number
@@ -10,3 +12,5 @@ export type ResponseBodyData<T> = ResponseBody & {
 export type ResponseBodyErrors = ResponseBody & {
     errors: Record<string, string[]>
 }
+
+export type ResponseBodyPagination<T> = ResponseBodyData<Pagination<T>>
