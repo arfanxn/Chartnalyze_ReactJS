@@ -35,7 +35,6 @@ const UserMenuDropdown = forwardRef<HTMLDivElement, Props>(
         const logout = useSelfStore((state) => state.logout)
 
         const handleLogout = async () => {
-            // TODO: implement a better UI confirmation dialog
             if (confirm('Are you sure you want to logout?') === false) return
 
             try {
