@@ -1,1 +1,9 @@
-export type LoadingKeys = 'self' | 'notifications.index' // there could be more
+export type LoadingKeys =
+    // User
+    | 'self'
+
+    // Notifications
+    | 'notifications.index'
+    | 'notifications.toggleRead'
+
+// there could be more
