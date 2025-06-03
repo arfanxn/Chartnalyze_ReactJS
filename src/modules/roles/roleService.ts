@@ -7,3 +7,11 @@ export const assignToUser = async (form: AssignUserRoleForm) => {
         message: response.data.message,
     }
 }
+
+export const paginate = async () => {
+    const response = await roleRepository.paginate()
+    return {
+        message: response.data.message,
+        pagination: response.data.data,
+    }
+}
