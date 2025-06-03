@@ -1,14 +1,16 @@
-import axiosInstance from '@/core/config/axios'
 import { AxiosResponse } from 'axios'
-import { ResponseBody, ResponseBodyData } from '@/shared/types/responses'
-import { User } from '@/modules/users/User'
+
+import axiosInstance from '@/core/config/axios'
 import { LoginForm } from '@/features/login/types/LoginForm'
 import { OtpCodeForm } from '@/features/otpVerification/types/OtpCodeForm'
 import { RegisterForm } from '@/features/register/types/RegisterForm'
 import { ResetPasswordForm } from '@/features/resetPassword/types/ResetPasswordForm'
-import { UpdateSelfForm } from '@/features/selfEdit/types/UpdateSelfForm'
 import { UpdateSelfEmailForm } from '@/features/selfEdit/types/UpdateSelfEmailForm'
+import { UpdateSelfForm } from '@/features/selfEdit/types/UpdateSelfForm'
 import { UpdateSelfPasswordForm } from '@/features/selfSettingsEdit/types/UpdateSelfPasswordForm'
+import { User } from '@/modules/users/User'
+import { UserPagination } from '@/modules/users/types/UserPagination'
+import { ResponseBody, ResponseBodyData } from '@/shared/types/responses'
 
 // TODO: Save user data into local storage or other solution is to fetch user data from backend on every page reload
 
@@ -76,5 +78,20 @@ export const updateSelfPassword = async (
     form: UpdateSelfPasswordForm,
 ): Promise<AxiosResponse<ResponseBody>> => {
     const response = await axiosInstance.patch(`/api/users/self/password`, form)
+    return response
+}
+
+export const paginate = async (
+    params?: URLSearchParams,
+): Promise<AxiosResponse<ResponseBodyData<UserPagination>>> => {
+    params = params ?? new URLSearchParams(window.location.search)
+
+    if (!params.has('sort')) params.set('sort', '-created_at')
+    if (!params.has('join')) params.set('join', 'role,country')
+
+    const response = await axiosInstance.get(`/api/users`, {
+        params,
+    })
+
     return response
 }
