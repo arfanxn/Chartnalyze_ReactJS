@@ -1,16 +1,14 @@
 import axiosInstance from '@/core/config/axios'
 import { AxiosResponse } from 'axios'
 import { ResponseBody, ResponseBodyData } from '@/shared/types/responses'
-import { User } from '@/types/userTypes'
-import {
-    LoginForm,
-    OtpCodeForm,
-    RegisterForm,
-    ResetPasswordForm,
-    UpdateSelfEmailForm,
-    UpdateSelfForm,
-    UpdateSelfPasswordForm,
-} from '@/types/formTypes'
+import { User } from '@/modules/users/User'
+import { LoginForm } from '@/features/login/types/LoginForm'
+import { OtpCodeForm } from '@/features/otpVerification/types/OtpCodeForm'
+import { RegisterForm } from '@/features/register/types/RegisterForm'
+import { ResetPasswordForm } from '@/features/resetPassword/types/ResetPasswordForm'
+import { UpdateSelfForm } from '@/features/selfEdit/types/UpdateSelfForm'
+import { UpdateSelfEmailForm } from '@/features/selfEdit/types/UpdateSelfEmailForm'
+import { UpdateSelfPasswordForm } from '@/features/selfSettingsEdit/types/UpdateSelfPasswordForm'
 
 // TODO: Save user data into local storage or other solution is to fetch user data from backend on every page reload
 
