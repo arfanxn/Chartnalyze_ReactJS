@@ -1,5 +1,5 @@
 import DashboardLayout from '@/core/layouts/DashboardLayout'
-import UserPaginationCard from './components/UserPaginationCard'
+import UserPaginationCard from '@/features/usersIndex/components/UserPaginationCard'
 
 function UsersIndex() {
     return (
