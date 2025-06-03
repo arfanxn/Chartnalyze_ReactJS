@@ -36,6 +36,8 @@ const PermissionsIndex = lazy(
     () => import('@/features/permissionsIndex/PermissionsIndex'),
 )
 
+const NotFound = lazy(() => import('@/features/notFound/NotFound'))
+
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -130,5 +132,9 @@ export const router = createBrowserRouter([
                 ],
             },
         ],
+    },
+    {
+        path: '*',
+        element: <NotFound />,
     },
 ])
