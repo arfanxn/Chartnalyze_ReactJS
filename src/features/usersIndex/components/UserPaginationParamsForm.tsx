@@ -33,7 +33,7 @@ const UserPaginationParamsForm = forwardRef<HTMLFormElement, Props>(
 
         return (
             <form
-                className={classNames(className, 'flex flex-row gap-4')}
+                className={classNames(className, 'flex flex-col gap-4')}
                 {...props}
                 ref={ref}
                 onSubmit={(e) => e.preventDefault()}
