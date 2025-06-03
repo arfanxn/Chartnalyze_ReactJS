@@ -1,5 +1,4 @@
 import CIcon from '@/shared/components/CIcon'
-import CImage from '@/shared/components/CImage'
 import classNames from 'classnames'
 import NotificationsDropdown from '@/core/components/dashboard/NotificationsDropdown'
 import UserMenuDropdown from '@/core/components/dashboard/UserMenuDropdown'
@@ -10,6 +9,7 @@ import { useBool } from '@/shared/hooks/useBool'
 import { useSelfStore } from '@/core/stores/useSelfStore'
 import { useScreenSize } from '@/shared/hooks/useScreenSize'
 import { useLoadingsStore } from '@/core/stores/useLoadingsStore'
+import UserAvatarImage from '../users/UserAvatarImage'
 
 type Props = HTMLProps<HTMLElement>
 
@@ -73,12 +73,8 @@ const Header = forwardRef<HTMLDivElement, Props>(({ className }, ref) => {
                             className="flex h-8 cursor-pointer items-center justify-center md:h-10"
                             onClick={toggleUserMenuDropdown}
                         >
-                            <figure className="flex size-8 items-center justify-center overflow-hidden rounded-full outline outline-black md:size-10">
-                                <CImage
-                                    // TODO: replace with user image
-                                    src="https://react-demo.tailadmin.com/images/user/owner.jpg"
-                                />
-                            </figure>
+                            {self && <UserAvatarImage user={self} />}
+
                             <div className="ml-2 flex items-center gap-x-2">
                                 <span className="hidden md:inline md:text-sm">
                                     {isSelfLoading || !self
