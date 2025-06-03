@@ -12,8 +12,6 @@ import { User } from '@/modules/users/User'
 import { UserPagination } from '@/modules/users/types/UserPagination'
 import { ResponseBody, ResponseBodyData } from '@/shared/types/responses'
 
-// TODO: Save user data into local storage or other solution is to fetch user data from backend on every page reload
-
 export const register = async (
     form: RegisterForm,
 ): Promise<AxiosResponse<ResponseBodyData<{ user: User }>>> => {
