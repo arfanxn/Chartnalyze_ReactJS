@@ -1,13 +1,12 @@
-import { forwardRef, HTMLAttributes, useEffect, useRef } from 'react'
+import { forwardRef, HTMLAttributes, useEffect /* useRef */ } from 'react'
 import classNames from 'classnames'
 import { useSelfStore } from '@/core/stores/useSelfStore'
 import CButton from '@/shared/components/CButton'
 import CCard from '@/shared/components/CCard'
-import CImage from '@/shared/components/CImage'
-import CIcon from '@/shared/components/CIcon'
+// import CIcon from '@/shared/components/CIcon'
 import CAlert from '@/shared/components/CAlert'
 import CInputIconedLabeled from '@/shared/components/CInputIconedLabeled'
-import { object, string, mixed } from 'yup'
+import { object, string /*mixed*/ } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import moment from 'moment'
@@ -18,32 +17,33 @@ import {
 } from '@/shared/helpers/errorHelpers'
 import { useNavigate } from 'react-router'
 import { toast } from '@/shared/helpers/toastHelpers'
+import UserAvatarImage from '@/core/components/users/UserAvatarImage'
 
 const schema = object().shape({
-    avatar: mixed<FileList>()
-        .nullable()
-        .test(
-            'fileSize',
-            'File size must be less than 2 megabytes',
-            (value) => {
-                return !value || value[0]?.size <= 2000000
-            },
-        )
-        .test(
-            'fileType',
-            'File must be .jpeg, .jpg, .png or .webp',
-            (value) => {
-                return (
-                    !value ||
-                    [
-                        'image/jpeg',
-                        'image/jpg',
-                        'image/png',
-                        'image/webp',
-                    ].includes(value[0]?.type)
-                )
-            },
-        ),
+    // avatar: mixed<File>()
+    //     .nullable()
+    //     .test(
+    //         'fileSize',
+    //         'File size must be less than 2 megabytes',
+    //         (value) => {
+    //             return !value || value?.size <= 2000000
+    //         },
+    //     )
+    //     .test(
+    //         'fileType',
+    //         'File must be .jpeg, .jpg, .png or .webp',
+    //         (value) => {
+    //             return (
+    //                 !value ||
+    //                 [
+    //                     'image/jpeg',
+    //                     'image/jpg',
+    //                     'image/png',
+    //                     'image/webp',
+    //                 ].includes(value?.type)
+    //             )
+    //         },
+    //     ),
     username: string().label('Username').required().min(2).max(16),
     email: string().label('Email').required().email().min(2).max(50),
     name: string().label('Name').nullable().min(2).max(50),
@@ -59,8 +59,8 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
         const self = useSelfStore((state) => state.self)
         const updateSelf = useSelfStore((state) => state.update)
 
-        const avatarInputRef = useRef<HTMLInputElement | null>(null)
-        const avatarInputId = 'avatar-upload'
+        // const avatarInputRef = useRef<HTMLInputElement | null>(null)
+        // const avatarInputId = 'avatar-upload'
 
         const {
             register: registerInput,
@@ -77,9 +77,8 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
             try {
                 if (self === null) return
 
-                // TODO: implement avatar update
-                const { avatar, name, birthDate, username, email } = getValues()
-                console.log(avatar)
+                const { /*avatar, */ name, birthDate, username, email } =
+                    getValues()
 
                 const isNameChanged = self.name !== name
                 const isBirthDateChanged = self.birthDate !== birthDate
@@ -150,14 +149,13 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
                     <div className="grid grid-cols-1 items-center gap-x-4 lg:grid-cols-[auto_1fr] lg:items-start">
                         <div className="relative flex flex-col items-center justify-center">
                             <div className="relative">
-                                <figure className="size-50 overflow-hidden rounded-full outline outline-black md:size-40">
-                                    <CImage
-                                        src="https://react-demo.tailadmin.com/images/user/owner.jpg"
-                                        alt="User avatar"
-                                        className="h-full w-full object-cover"
+                                {self && (
+                                    <UserAvatarImage
+                                        className="size-50! md:size-40!"
+                                        user={self}
                                     />
-                                </figure>
-                                <label
+                                )}
+                                {/* <label
                                     htmlFor={avatarInputId}
                                     className="absolute right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-black bg-white p-1 shadow-sm md:-translate-x-1/4 md:-translate-y-1/4"
                                 >
@@ -165,9 +163,9 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
                                         icon="lucide:upload"
                                         className="text-2xl text-black md:text-xl"
                                     />
-                                </label>
+                                </label> */}
                             </div>
-                            {errors.avatar && (
+                            {/* {errors.avatar && (
                                 <CAlert
                                     message={errors.avatar.message!}
                                     type="error"
@@ -177,10 +175,10 @@ const SelfProfileEditCard = forwardRef<HTMLDivElement, Props>(
                                 id={avatarInputId}
                                 hidden
                                 className="hidden"
-                                {...registerInput('avatar')}
                                 type="file"
+                                {...registerInput('avatar')}
                                 ref={avatarInputRef}
-                            />
+                            /> */}
                         </div>
 
                         <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
