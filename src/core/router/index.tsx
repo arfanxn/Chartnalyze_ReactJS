@@ -32,6 +32,9 @@ const SelfSettingsEdit = lazy(
 )
 
 const RolesIndex = lazy(() => import('@/features/rolesIndex/RolesIndex'))
+const PermissionsIndex = lazy(
+    () => import('@/features/permissionsIndex/PermissionsIndex'),
+)
 
 export const router = createBrowserRouter([
     {
@@ -98,6 +101,18 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <RolesIndex />,
+            },
+        ],
+    },
+    {
+        path: '/permissions',
+        element: (
+            <MiddlewareBoundary middlewares={[Authenticated, EmailVerified]} />
+        ),
+        children: [
+            {
+                index: true,
+                element: <PermissionsIndex />,
             },
         ],
     },
