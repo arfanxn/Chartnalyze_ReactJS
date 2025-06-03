@@ -52,6 +52,6 @@ export const useNotificationPaginationStore = create(
     ),
 )
 
-export type SelfStore = ReturnType<
+export type NotificationPaginationStore = ReturnType<
     typeof useNotificationPaginationStore.getState
 >
