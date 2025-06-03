@@ -12,7 +12,7 @@ const RolePaginationParamsForm = forwardRef<HTMLFormElement, Props>(
         const paginate = useRolePaginationStore((state) => state.paginate)
 
         const handleFilterName = (keyword: string) => {
-            const key = 'filter[name]'
+            const key = 'filter'
             if (keyword) searchParams.set(key, keyword)
             else searchParams.delete(key)
 
