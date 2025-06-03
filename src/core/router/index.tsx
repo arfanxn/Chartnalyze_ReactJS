@@ -8,18 +8,30 @@ import EmailVerified from '@/core/middlewares/EmailVerified'
 
 // Lazy-loaded components
 const Landing = lazy(() => import('@/features/landing/Landing'))
-const OtpVerification = lazy(() => import('@/features/otpVerification/OtpVerification'))
+const OtpVerification = lazy(
+    () => import('@/features/otpVerification/OtpVerification'),
+)
 const Register = lazy(() => import('@/features/register/Register'))
 const Login = lazy(() => import('@/features/login/Login'))
-const ForgotPassword = lazy(() => import('@/features/forgotPassword/ForgotPassword'))
-const ResetPassword = lazy(() => import('@/features/resetPassword/ResetPassword'))
+const ForgotPassword = lazy(
+    () => import('@/features/forgotPassword/ForgotPassword'),
+)
+const ResetPassword = lazy(
+    () => import('@/features/resetPassword/ResetPassword'),
+)
 const Dashboard = lazy(() => import('@/features/dashboard/Dashboard'))
 const NotificationsIndex = lazy(
     () => import('@/features/notificationsIndex/NotificationsIndex'),
 )
 const UsersIndex = lazy(() => import('@/features/usersIndex/UsersIndex'))
-const SelfAccountEdit = lazy(() => import('@/features/selfEdit/SelfAccountEdit'))
-const SelfSettingsEdit = lazy(() => import('@/features/selfSettingsEdit/SelfSettingsEdit'))
+const SelfAccountEdit = lazy(
+    () => import('@/features/selfEdit/SelfAccountEdit'),
+)
+const SelfSettingsEdit = lazy(
+    () => import('@/features/selfSettingsEdit/SelfSettingsEdit'),
+)
+
+const RolesIndex = lazy(() => import('@/features/rolesIndex/RolesIndex'))
 
 export const router = createBrowserRouter([
     {
@@ -74,6 +86,18 @@ export const router = createBrowserRouter([
                         ],
                     },
                 ],
+            },
+        ],
+    },
+    {
+        path: '/roles',
+        element: (
+            <MiddlewareBoundary middlewares={[Authenticated, EmailVerified]} />
+        ),
+        children: [
+            {
+                index: true,
+                element: <RolesIndex />,
             },
         ],
     },

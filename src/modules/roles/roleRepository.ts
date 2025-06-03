@@ -10,6 +10,7 @@ export const paginate = async (
     params = params ?? new URLSearchParams(window.location.search)
 
     if (!params.has('sort')) params.set('sort', 'name')
+    if (!params.has('join')) params.set('join', 'permissions')
 
     const response = await axiosInstance.get(`/api/roles`, {
         params,
