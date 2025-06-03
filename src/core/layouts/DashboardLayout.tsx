@@ -26,7 +26,7 @@ const DashboardLayout = forwardRef<HTMLDivElement, Props>(
                 >
                     <Sidebar ref={sidebarRef} />
                     <main
-                        className="space-y-4 overflow-x-hidden px-4 py-4 md:space-y-4 md:px-8 md:py-4"
+                        className="space-y-4 overflow-x-hidden px-4 pt-4 pb-8 md:space-y-4 md:px-8 md:pt-4 md:pb-8"
                         style={{ marginLeft: sidebarWidth }}
                     >
                         {props.children}
