@@ -1,16 +1,15 @@
 import DashboardLayout from '@/core/layouts/DashboardLayout'
-import { Link } from 'react-router'
+import UserPaginationCard from './components/UserPaginationCard'
 
 function UsersIndex() {
     return (
         <DashboardLayout>
-            <h1 className="text-primary text-4xl font-semibold">Users Index</h1>
-            <Link
-                className="bg-secondary rounded-md px-2 py-1 text-white"
-                to={'/dashboard'}
-            >
-                Dashboard
-            </Link>
+            <header>
+                <h2 className="text-primary text-2xl font-semibold">
+                    User Management
+                </h2>
+            </header>
+            <UserPaginationCard />
         </DashboardLayout>
     )
 }
