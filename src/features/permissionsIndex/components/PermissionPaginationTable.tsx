@@ -26,12 +26,6 @@ const RolePaginationTable = forwardRef<HTMLTableElement, Props>(
                             scope="col"
                             className="text-left font-medium text-black"
                         >
-                            Id
-                        </th>
-                        <th
-                            scope="col"
-                            className="text-left font-medium text-black"
-                        >
                             Name
                         </th>
                         <th
@@ -45,11 +39,6 @@ const RolePaginationTable = forwardRef<HTMLTableElement, Props>(
                 <tbody>
                     {pagination?.permissions.map((permission) => (
                         <tr key={permission.id} className="cursor-pointer">
-                            <td>
-                                <span className="text-black">
-                                    {permission.id}
-                                </span>
-                            </td>
                             <td>
                                 <span className="text-black">
                                     {permission.name}

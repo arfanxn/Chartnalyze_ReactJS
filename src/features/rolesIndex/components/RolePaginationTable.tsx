@@ -24,12 +24,6 @@ const RolePaginationTable = forwardRef<HTMLTableElement, Props>(
                             scope="col"
                             className="text-left font-medium text-black"
                         >
-                            Id
-                        </th>
-                        <th
-                            scope="col"
-                            className="text-left font-medium text-black"
-                        >
                             Name
                         </th>
                         <th
@@ -43,9 +37,6 @@ const RolePaginationTable = forwardRef<HTMLTableElement, Props>(
                 <tbody>
                     {pagination?.roles.map((role) => (
                         <tr key={role.id} className="cursor-pointer">
-                            <td>
-                                <span className="text-black">{role.id}</span>
-                            </td>
                             <td>
                                 <span className="text-black">
                                     {uppercaseFirst(role.name)}
