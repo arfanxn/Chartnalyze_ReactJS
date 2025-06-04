@@ -1,23 +1,15 @@
 import { isMobile } from 'react-device-detect'
 import { forwardRef, HTMLProps, useEffect, useRef } from 'react'
-import { ROLE_ADMIN } from '@/modules/roles/constants/roles'
 import Header from '@/core/components/dashboard/Header'
 import Layout from '@/core/layouts/Layout'
 import classNames from 'classnames'
 import useElementSize from '@/shared/hooks/useElementSize'
 import Sidebar from '@/core/components/dashboard/Sidebar'
-import { useSelfStore } from '@/core/stores/useSelfStore'
-import { useLoadingsStore } from '@/core/stores/useLoadingsStore'
 
 type Props = HTMLProps<HTMLElement>
 
 const DashboardLayout = forwardRef<HTMLDivElement, Props>(
     ({ className, ...props }, ref) => {
-        const self = useSelfStore((state) => state.self)
-        const isSelfLoading = useLoadingsStore((state) =>
-            state.isLoading('self'),
-        )
-
         const headerRef = useRef<HTMLDivElement>(null)
         const sidebarRef = useRef<HTMLDivElement>(null)
         const { height: headerHeight } =
@@ -46,9 +38,8 @@ const DashboardLayout = forwardRef<HTMLDivElement, Props>(
                         marginTop: headerHeight,
                     }}
                 >
-                    {!isSelfLoading && self?.role?.name === ROLE_ADMIN && (
-                        <Sidebar ref={sidebarRef} />
-                    )}
+                    <Sidebar ref={sidebarRef} />
+
                     <main
                         className="space-y-4 overflow-x-hidden px-4 pt-4 pb-8 md:space-y-4 md:px-8 md:pt-4 md:pb-8"
                         style={{ marginLeft: sidebarWidth }}
