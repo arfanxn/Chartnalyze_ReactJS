@@ -1,5 +1,7 @@
+import axios from 'axios'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import { object, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {
@@ -13,8 +15,8 @@ import CButton from '@/shared/components/CButton'
 import CCard from '@/shared/components/CCard'
 import CInputIconedLabeled from '@/shared/components/CInputIconedLabeled'
 import CInputPassword from '@/shared/components/CInputPassword'
+import CButtonIconned from '@/shared/components/CButtonIconned'
 import EntryLayout from '@/core/layouts/EntryLayout'
-import axios from 'axios'
 
 const schema = object().shape({
     identifier: string().label('Email or username').required().min(2).max(50),
@@ -22,8 +24,12 @@ const schema = object().shape({
 })
 
 function Login() {
+    const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     const login = useSelfStore((state) => state.login)
+    const loginGoogleAuthorized = useSelfStore(
+        (state) => state.loginGoogleAuthorized,
+    )
 
     const {
         register: registerInput,
@@ -50,6 +56,31 @@ function Login() {
             throw e
         }
     }
+
+    const handleLoginGoogle = async () => {
+        const baseURL = import.meta.env.VITE__API_URL
+        window.location.href = `${baseURL}/api/users/login/google`
+    }
+
+    const handleLoginGoogleAuthorized = async () => {
+        try {
+            const { message } = await loginGoogleAuthorized(searchParams)
+            toast({ message, type: 'success' })
+            navigate('/dashboard', { replace: true })
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                toast({ message: e.response!.data.message, type: 'error' })
+            }
+            throw e
+        }
+    }
+
+    useEffect(() => {
+        if (searchParams.has('state') && searchParams.has('code')) {
+            handleLoginGoogleAuthorized()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <EntryLayout>
@@ -90,9 +121,18 @@ function Login() {
                             )}
                         </div>
 
-                        <CButton className="mt-2 w-full py-2! font-semibold md:text-base">
-                            Login
-                        </CButton>
+                        <div className="flex flex-col gap-y-1">
+                            <CButton className="mt-2 w-full py-2! font-semibold md:text-base">
+                                Login
+                            </CButton>
+                            <CButtonIconned
+                                className="mt-2 w-full flex-row-reverse justify-center gap-2 bg-white! py-2! font-semibold text-black! md:text-base"
+                                type="button"
+                                onClick={handleLoginGoogle}
+                                label="Login with Google"
+                                icon="logos:google-icon"
+                            />
+                        </div>
                     </form>
 
                     <div className="flex flex-col items-center space-y-0 gap-y-0">

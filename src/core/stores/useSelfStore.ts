@@ -50,6 +50,14 @@ export const useSelfStore = create(
                 set({ self: user })
                 return { message }
             },
+
+            loginGoogleAuthorized: async (params: URLSearchParams) => {
+                const { message } =
+                    await userService.loginGoogleAuthorized(params)
+                const { user } = await userService.showSelf()
+                set({ self: user })
+                return { message }
+            },
             /**
              * onboard is an asynchronous function that registers and logs in a new user.
              * It first registers the user using the provided form data, then logs in the user

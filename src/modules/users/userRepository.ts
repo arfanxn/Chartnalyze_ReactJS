@@ -26,6 +26,19 @@ export const login = async (
     return response
 }
 
+export const loginGoogleAuthorized = async (
+    params: URLSearchParams,
+): Promise<AxiosResponse<ResponseBodyData<{ accessToken: string }>>> => {
+    const response = await axiosInstance.post(
+        `/api/users/login/google/authorized`,
+        {},
+        {
+            params,
+        },
+    )
+    return response
+}
+
 export const logout = async (): Promise<AxiosResponse<ResponseBody>> => {
     const response = await axiosInstance.delete(`/api/users/self/logout`)
     return response

@@ -31,6 +31,18 @@ export const login = async (form: LoginForm): Promise<{ message: string }> => {
     }
 }
 
+export const loginGoogleAuthorized = async (params: URLSearchParams) => {
+    const response = await userRepository.loginGoogleAuthorized(params)
+    const { accessToken } = response.data.data
+    Cookies.set('access_token', accessToken, {
+        secure: true,
+        sameSite: 'strict',
+    })
+    return {
+        message: response.data.message,
+    }
+}
+
 export const logout = async (): Promise<{ message: string }> => {
     const response = await userRepository.logout()
     Cookies.remove('access_token')
