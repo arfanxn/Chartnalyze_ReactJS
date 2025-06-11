@@ -50,7 +50,18 @@ const USER_MANAGEMENT_NG: NavigationGroup = {
     ],
 }
 
-const ADMIN_NGS = [MENU_NG, USER_MANAGEMENT_NG]
+const MONITOR_NG: NavigationGroup = {
+    group: 'Monitor',
+    items: [
+        {
+            label: 'Activities',
+            icon: 'lucide:history',
+            url: '/activities',
+        },
+    ],
+}
+
+const ADMIN_NGS = [MENU_NG, MONITOR_NG, USER_MANAGEMENT_NG]
 const NGS = [MENU_NG]
 
 const Sidebar = forwardRef<HTMLElement, Props>(

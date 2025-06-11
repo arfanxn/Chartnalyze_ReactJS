@@ -35,6 +35,9 @@ const RolesIndex = lazy(() => import('@/features/rolesIndex/RolesIndex'))
 const PermissionsIndex = lazy(
     () => import('@/features/permissionsIndex/PermissionsIndex'),
 )
+const ActivitiesIndex = lazy(
+    () => import('@/features/activitiesIndex/ActivitiesIndex'),
+)
 
 const NotFound = lazy(() => import('@/features/notFound/NotFound'))
 
@@ -115,6 +118,18 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <PermissionsIndex />,
+            },
+        ],
+    },
+    {
+        path: '/activities',
+        element: (
+            <MiddlewareBoundary middlewares={[Authenticated, EmailVerified]} />
+        ),
+        children: [
+            {
+                index: true,
+                element: <ActivitiesIndex />,
             },
         ],
     },
