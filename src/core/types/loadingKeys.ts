@@ -20,4 +20,7 @@ export type LoadingKeys =
     // Permissions
     | 'permissions.index'
 
+    // Activities
+    | 'activities.index'
+
 // there could be more
